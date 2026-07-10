@@ -59,9 +59,14 @@ body {
 .language-menu {
   z-index: 90;
 }
+#site-header {
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+}
 .header-pill {
   background: #fff !important;
   border-color: #fff !important;
+  max-width: 96rem !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
   transition: box-shadow 0.3s ease, padding 0.3s ease, margin 0.3s ease, transform 0.3s ease;
@@ -321,9 +326,12 @@ footer a {
 @media (max-width: 640px) {
   #site-header {
     padding-top: 0.75rem;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
   }
   .header-pill {
     border-radius: 1.25rem;
+    max-width: calc(100vw - 1rem) !important;
     padding: 0.75rem 1rem;
   }
   .header-pill img {
