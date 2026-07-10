@@ -60,6 +60,10 @@ body {
   z-index: 90;
 }
 .header-pill {
+  background: #fff !important;
+  border-color: #fff !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
   transition: box-shadow 0.3s ease, padding 0.3s ease, margin 0.3s ease, transform 0.3s ease;
 }
 .header-pill.scrolled {
