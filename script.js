@@ -2,11 +2,66 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---------- Éléments communs à toutes les pages ---------- */
+  const domainMenu = document.getElementById('menu-domaines');
+
+  if (domainMenu) {
+    const domainMenuColumns = domainMenu.querySelectorAll(':scope > .grid > div');
+    const domainMenuIntro = domainMenuColumns[0];
+    const domainMenuList = domainMenuColumns[1];
+    const domainMenuVisual = domainMenuColumns[2];
+
+    if (domainMenuIntro && !domainMenuIntro.querySelector('.domain-overview-link')) {
+      const overviewLink = document.createElement('a');
+      overviewLink.href = 'domaines.html';
+      overviewLink.className = 'domain-overview-link mt-7 inline-flex items-center gap-2 rounded-xl bg-blue px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-navy';
+      overviewLink.innerHTML = `Voir tous les domaines
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/></svg>`;
+      domainMenuIntro.appendChild(overviewLink);
+    }
+
+    domainMenuList?.classList.add('domain-menu-list');
+
+    if (domainMenuVisual) {
+      domainMenuVisual.innerHTML = `
+        <div id="domain-menu-preview" class="domain-menu-preview relative h-[330px] w-full overflow-hidden rounded-2xl bg-navy">
+          <img id="domain-menu-preview-image" src="assets/images/menu-domain-organisation.jpg" alt="Développement organisationnel" class="h-full w-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#173A63]/95 via-[#173A63]/45 to-transparent"></div>
+          <div class="absolute inset-x-0 bottom-0 p-6 text-white">
+            <p class="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">IFPE Conseil</p>
+            <h4 id="domain-menu-preview-title" class="text-xl font-bold leading-snug">Développement organisationnel</h4>
+            <p id="domain-menu-preview-text" class="mt-2 text-xs leading-5 text-white/85">Améliorer durablement l’organisation, les processus et la performance.</p>
+            <span class="mt-4 inline-flex items-center gap-2 text-xs font-bold">En savoir plus
+              <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>`;
+    }
+  }
+
+  let backToTop = document.getElementById('back-to-top');
+
+  if (!backToTop) {
+    backToTop = document.createElement('button');
+    backToTop.id = 'back-to-top';
+    backToTop.type = 'button';
+    backToTop.setAttribute('aria-label', 'Retour en haut de la page');
+    backToTop.innerHTML = `
+      <svg aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="m5 12 7-7 7 7M12 5v14" />
+      </svg>`;
+    document.body.appendChild(backToTop);
+  }
+
   /* ---------- Header scroll effect ---------- */
   const siteHeader = document.getElementById('site-header');
   const headerPill = document.querySelector('.header-pill');
+  let lastScrollY = window.scrollY;
 
   function updateHeaderOnScroll() {
+    const currentScrollY = window.scrollY;
+    const scrollingUp = currentScrollY < lastScrollY;
+
     if (window.scrollY > 20) {
       siteHeader.classList.add('scrolled');
       headerPill.classList.add('scrolled');
@@ -14,10 +69,74 @@ document.addEventListener('DOMContentLoaded', () => {
       siteHeader.classList.remove('scrolled');
       headerPill.classList.remove('scrolled');
     }
+
+    if (currentScrollY <= 120 || scrollingUp) {
+      siteHeader.classList.remove('header-hidden');
+    } else {
+      siteHeader.classList.add('header-hidden');
+    }
+
+    backToTop?.classList.toggle('is-visible', window.scrollY > 420);
+    lastScrollY = Math.max(currentScrollY, 0);
   }
 
   updateHeaderOnScroll();
   window.addEventListener('scroll', updateHeaderOnScroll, { passive: true });
+
+  backToTop?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ---------- Bouton lecture de la vidéo ---------- */
+  const presentationVideo = document.getElementById('presentation-video');
+  const presentationPlay = document.getElementById('presentation-play');
+  const videoFocusOverlay = document.getElementById('video-focus-overlay');
+  const presentationCard = presentationVideo?.closest('.presentation-video-card');
+
+  if (presentationVideo && presentationPlay && presentationCard && videoFocusOverlay) {
+    const openVideoFocus = () => {
+      presentationCard.classList.add('is-focused');
+      videoFocusOverlay.classList.add('is-active');
+      videoFocusOverlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('video-focus-active');
+    };
+
+    const closeVideoFocus = () => {
+      presentationCard.classList.remove('is-focused');
+      videoFocusOverlay.classList.remove('is-active');
+      videoFocusOverlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('video-focus-active');
+    };
+
+    presentationPlay.addEventListener('click', () => {
+      presentationVideo.play();
+    });
+
+    presentationVideo.addEventListener('play', () => {
+      presentationPlay.classList.add('is-hidden');
+      openVideoFocus();
+    });
+
+    presentationVideo.addEventListener('pause', () => {
+      if (!presentationVideo.ended) presentationPlay.classList.remove('is-hidden');
+      closeVideoFocus();
+    });
+
+    presentationVideo.addEventListener('ended', () => {
+      presentationPlay.classList.remove('is-hidden');
+      closeVideoFocus();
+    });
+
+    videoFocusOverlay.addEventListener('click', () => {
+      presentationVideo.pause();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && presentationCard.classList.contains('is-focused')) {
+        presentationVideo.pause();
+      }
+    });
+  }
 
 
   /* ---------- Mega menus ---------- */
@@ -68,6 +187,53 @@ document.addEventListener('DOMContentLoaded', () => {
     panel.addEventListener('mouseenter', () => clearTimeout(closeTimer));
     panel.addEventListener('mouseleave', scheduleClose);
   });
+
+  /* ---------- Aperçu au survol : menu Domaines ---------- */
+  const domainMenuLinks = [...document.querySelectorAll('#menu-domaines .domain-menu-list a')];
+  const domainPreview = document.getElementById('domain-menu-preview');
+  const domainPreviewImage = document.getElementById('domain-menu-preview-image');
+  const domainPreviewTitle = document.getElementById('domain-menu-preview-title');
+  const domainPreviewText = document.getElementById('domain-menu-preview-text');
+
+  const domainPreviewData = [
+    ['assets/images/menu-domain-organisation.jpg', 'Développement organisationnel', 'Améliorer durablement l’organisation, les processus et la performance.'],
+    ['assets/images/menu-domain-rh.png', 'Ressources humaines', 'Structurer les compétences, les parcours et la performance des équipes.'],
+    ['assets/images/menu-domain-formation.png', 'Formation professionnelle', 'Développer les compétences grâce à des dispositifs pédagogiques adaptés.'],
+    ['assets/images/menu-domain-etudes.png', 'Études et référentiels', 'Concevoir des études, référentiels métiers et outils d’aide à la décision.'],
+    ['assets/images/transformation-numerique-ia.jpg', 'Transformation numérique et IA', 'Digitaliser les processus et intégrer l’intelligence artificielle avec méthode.'],
+    ['assets/images/menu-domain-strategie.jpg', 'Planification stratégique', 'Transformer la vision en feuilles de route concrètes et mobilisatrices.'],
+    ['assets/images/coaching-professionnel.jpg', 'Coaching professionnel', 'Renforcer le leadership, la cohésion et la mobilisation des équipes.']
+  ];
+  const domainPageTargets = ['organisation', 'rh', 'formation', 'referentiels', 'digital', 'strategie', 'coaching'];
+  let domainPreviewTimer = null;
+
+  domainMenuLinks.forEach((link, index) => {
+    link.href = `domaine-detail.html?d=${domainPageTargets[index]}`;
+  });
+
+  const updateDomainPreview = (index) => {
+    if (!domainPreview || !domainPreviewImage || !domainPreviewTitle || !domainPreviewText) return;
+    const [image, title, description] = domainPreviewData[index];
+
+    domainMenuLinks.forEach((link, linkIndex) => link.classList.toggle('is-active', linkIndex === index));
+    domainPreview.classList.add('is-changing');
+    window.clearTimeout(domainPreviewTimer);
+
+    domainPreviewTimer = window.setTimeout(() => {
+      domainPreviewImage.src = image;
+      domainPreviewImage.alt = title;
+      domainPreviewTitle.textContent = title;
+      domainPreviewText.textContent = description;
+      domainPreview.classList.remove('is-changing');
+    }, 140);
+  };
+
+  domainMenuLinks.forEach((link, index) => {
+    link.addEventListener('mouseenter', () => updateDomainPreview(index));
+    link.addEventListener('focus', () => updateDomainPreview(index));
+  });
+
+  if (domainMenuLinks.length) domainMenuLinks[0].classList.add('is-active');
 
   document.addEventListener('click', e => {
     if (!e.target.closest('#site-header')) closeAllMenus();
@@ -571,3 +737,90 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+// Accordéon des domaines d'intervention de la page d'accueil.
+(() => {
+  const section = document.querySelector('#domaines.ifpe-domains');
+  if (!section) return;
+
+  const descriptions = [
+    "Diagnostic organisationnel, optimisation des processus et mise en place de systèmes de management pour construire une organisation plus efficace, agile et orientée résultats.",
+    "Référentiels métiers et compétences, GPEC, recrutement, évaluation et accompagnement des parcours pour des équipes engagées et alignées sur la stratégie.",
+    "Ingénierie de formation, plans de développement des compétences, perfectionnement technique, leadership et formation des formateurs.",
+    "Études sectorielles, analyses des besoins, ingénierie des dispositifs et conception de référentiels métiers, compétences et formation.",
+    "Digitalisation des processus, gouvernance des données et intégration responsable de l’intelligence artificielle au service de la performance.",
+    "Élaboration de stratégies, feuilles de route, dispositifs de pilotage et accompagnement humain des transformations.",
+    "Coaching individuel et collectif, développement du leadership, cohésion et mobilisation durable des équipes."
+  ];
+
+  const images = [
+    "assets/images/domain-organisation-performance.gif",
+    "assets/images/domain-rh-strategique.gif",
+    "assets/images/domain-formation-competences.gif",
+    "assets/images/domain-etudes-referentiels.gif",
+    "assets/images/domain-transformation-numerique-ia.gif",
+    "assets/images/domain-strategie-changement.gif",
+    "assets/images/domain-coaching-equipes.gif"
+  ];
+
+  const items = [...section.querySelectorAll('ol > li')];
+  items.forEach((item, index) => {
+    const trigger = item.querySelector('a');
+    const iconTrigger = item.querySelector(':scope > span');
+    if (!trigger) return;
+
+    const panelId = `domain-panel-${index + 1}`;
+    trigger.setAttribute('role', 'button');
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.setAttribute('aria-controls', panelId);
+    iconTrigger?.setAttribute('role', 'button');
+    iconTrigger?.setAttribute('tabindex', '0');
+    iconTrigger?.setAttribute('aria-label', `Afficher ${trigger.textContent.trim()}`);
+    iconTrigger?.setAttribute('aria-expanded', 'false');
+    iconTrigger?.setAttribute('aria-controls', panelId);
+
+    const panel = document.createElement('div');
+    panel.id = panelId;
+    panel.className = 'domain-accordion-panel';
+    panel.setAttribute('aria-hidden', 'true');
+    panel.innerHTML = `
+      <div>
+        <div class="domain-accordion-content">
+          <img class="domain-icon" src="${images[index]}" alt="" loading="lazy" />
+          <p>${descriptions[index]}</p>
+        </div>
+      </div>`;
+    item.appendChild(panel);
+
+    const toggleDomain = (event) => {
+      event?.preventDefault();
+      const willOpen = !item.classList.contains('is-open');
+
+      items.forEach((otherItem) => {
+        otherItem.classList.remove('is-open');
+        const otherTrigger = otherItem.querySelector('a');
+        const otherIconTrigger = otherItem.querySelector(':scope > span');
+        const otherPanel = otherItem.querySelector('.domain-accordion-panel');
+        otherTrigger?.setAttribute('aria-expanded', 'false');
+        otherIconTrigger?.setAttribute('aria-expanded', 'false');
+        otherPanel?.setAttribute('aria-hidden', 'true');
+      });
+
+      if (willOpen) {
+        item.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        iconTrigger?.setAttribute('aria-expanded', 'true');
+        panel.setAttribute('aria-hidden', 'false');
+      }
+    };
+
+    trigger.addEventListener('click', toggleDomain);
+    iconTrigger?.addEventListener('click', toggleDomain);
+    iconTrigger?.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') toggleDomain(event);
+    });
+  });
+
+  // Tous les domaines restent fermés au chargement afin que la section
+  // complète tienne dans un seul écran, comme sur la référence.
+})();

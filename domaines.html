@@ -45,7 +45,7 @@
     }
 
     .page-hero {
-      min-height: 1120px;
+      min-height: clamp(42rem, 78vh, 50rem);
       background-image:
         linear-gradient(90deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.1) 48%, rgba(0, 0, 0, 0.04) 100%),
         url("assets/images/domaines-hero-consulting.png");
@@ -61,7 +61,7 @@
     }
 
     .stats-panel {
-      padding-bottom: 5rem;
+      padding-bottom: 2rem;
     }
 
     .stats-number {
@@ -69,9 +69,15 @@
     }
 
     .stats-blob {
-      width: min(24rem, calc(100vw - 3rem));
+      top: calc(100% + 1rem);
+      bottom: auto;
+      width: min(19rem, calc(100vw - 3rem));
       aspect-ratio: 1456 / 1080;
       filter: drop-shadow(0 18px 34px rgba(30, 58, 95, 0.18));
+    }
+
+    .intro-summary {
+      margin-top: 16rem;
     }
 
     .domain-card {
@@ -84,6 +90,210 @@
 
     #domaines {
       scroll-margin-top: 9rem;
+    }
+
+    /* Section Domaines — composition hexagonale */
+    #domaines.domain-hex-section {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(3.25rem, 5.5vh, 4.75rem) 1.25rem;
+      background: #F3F5F7;
+      border-top: 1px solid #E2E8F0;
+      border-bottom: 1px solid #E2E8F0;
+      isolation: isolate;
+    }
+
+    #domaines.domain-hex-section::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 4;
+      height: clamp(.4rem, .65vw, .6rem);
+      background: linear-gradient(
+        90deg,
+        #1E3A5F 0 36%,
+        #145C9E 36% 72%,
+        #2F93C9 72% 100%
+      );
+    }
+
+    .domain-hex-inner {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 76rem);
+      margin-inline: auto;
+    }
+
+    .domain-hex-heading {
+      max-width: 48rem;
+      margin-bottom: clamp(2rem, 3.8vh, 3rem);
+    }
+
+    .domain-hex-heading h2 {
+      color: var(--ifpe-dark-blue);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+
+    .domain-heading-rule {
+      width: 4rem;
+      height: .3rem;
+      margin: 1.1rem 0 1.25rem;
+      border-radius: 999px;
+      background: #2F93C9;
+    }
+
+    .domain-hex-heading p {
+      max-width: 43rem;
+      color: #526276;
+      font-size: clamp(.98rem, 1.5vw, 1.15rem);
+      line-height: 1.7;
+    }
+
+    .domain-honeycomb {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      align-items: center;
+      width: min(100%, 62rem);
+      margin-inline: auto;
+      column-gap: .55rem;
+    }
+
+    .domain-hex-card {
+      position: relative;
+      display: flex;
+      grid-column: span 2;
+      width: clamp(9.6rem, 15vw, 11.5rem);
+      aspect-ratio: 1;
+      align-items: center;
+      justify-content: center;
+      justify-self: center;
+      overflow: hidden;
+      color: #FFFFFF;
+      background: transparent;
+      cursor: pointer;
+      filter: drop-shadow(0 12px 12px rgba(30, 58, 95, .2));
+      transition: transform 300ms ease, filter 300ms ease, opacity 500ms ease;
+      will-change: transform;
+    }
+
+    .domain-hex-card::before,
+    .domain-hex-card::after {
+      display: none;
+    }
+
+    .domain-hex-image {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      display: block;
+      width: 128%;
+      height: 128%;
+      max-width: none;
+      object-fit: cover;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Le premier PNG remplit davantage sa toile : cette correction égalise
+       sa taille visuelle avec les six autres hexagones. */
+    .domain-hex-card:first-child .domain-hex-image {
+      width: 112%;
+      height: 112%;
+    }
+
+    .domain-hex-card:nth-child(1) { grid-column: 1 / 3; }
+    .domain-hex-card:nth-child(2) { grid-column: 3 / 5; }
+    .domain-hex-card:nth-child(3) { grid-column: 5 / 7; }
+    .domain-hex-card:nth-child(4) { grid-column: 7 / 9; }
+    .domain-hex-card:nth-child(5) { grid-column: 2 / 4; margin-top: -1.75rem; }
+    .domain-hex-card:nth-child(6) { grid-column: 4 / 6; margin-top: -1.75rem; }
+    .domain-hex-card:nth-child(7) { grid-column: 6 / 8; margin-top: -1.75rem; }
+
+    .domain-hex-card:hover,
+    .domain-hex-card.domain-reveal-pending.is-visible:hover {
+      z-index: 3;
+      transform: translateY(-8px) scale(1.03);
+      filter: drop-shadow(0 18px 18px rgba(20, 92, 158, .35)) brightness(1.08);
+    }
+
+    .domain-hex-card:focus-visible {
+      outline: 4px solid #FFFFFF;
+      outline-offset: -10px;
+      filter: drop-shadow(0 0 0 #FFFFFF) drop-shadow(0 0 7px #145C9E);
+    }
+
+    .domain-hex-card.domain-reveal-pending {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .domain-hex-card.domain-reveal-pending.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: var(--reveal-delay, 0ms);
+    }
+
+    .domain-bg-hex {
+      position: absolute;
+      z-index: 1;
+      width: clamp(5rem, 9vw, 8rem);
+      aspect-ratio: .88;
+      opacity: .11;
+      background: #2F93C9;
+      clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    }
+
+    .domain-bg-hex::after {
+      content: '';
+      position: absolute;
+      inset: 2px;
+      background: #FFFFFF;
+      clip-path: inherit;
+    }
+
+    .domain-bg-hex:nth-child(1) { left: -2.5rem; top: 18%; }
+    .domain-bg-hex:nth-child(2) { left: 3%; bottom: 8%; transform: scale(.68); }
+    .domain-bg-hex:nth-child(3) { right: -2rem; top: 13%; transform: scale(.78); }
+    .domain-bg-hex:nth-child(4) { right: 4%; bottom: 9%; transform: scale(.58); }
+
+    @media (max-width: 899px) {
+      .domain-honeycomb {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem .5rem;
+      }
+
+      .domain-hex-card,
+      .domain-hex-card:nth-child(n) {
+        grid-column: auto;
+        margin-top: 0;
+      }
+
+      .domain-hex-card:nth-child(7) { grid-column: 2; }
+    }
+
+    @media (max-width: 639px) {
+      #domaines.domain-hex-section { padding-inline: 1rem; }
+      .domain-hex-heading { margin-bottom: 2.75rem; text-align: center; }
+      .domain-heading-rule { margin-inline: auto; }
+      .domain-honeycomb { grid-template-columns: 1fr; gap: 1rem; }
+      .domain-hex-card,
+      .domain-hex-card:nth-child(n) { grid-column: 1; width: min(12.5rem, 70vw); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .domain-hex-card,
+      .domain-hex-card.domain-reveal-pending,
+      .domain-hex-card.domain-reveal-pending.is-visible {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .domain-hex-card:hover { transform: none; }
     }
 
     .domains-carousel {
@@ -183,40 +393,136 @@
       background: linear-gradient(90deg, rgba(79, 163, 209, 0), rgba(79, 163, 209, 0.55), rgba(47, 111, 163, 0.45), rgba(79, 163, 209, 0));
     }
 
-    .approach-card {
-      min-height: 10rem;
-      border-radius: 3.5rem 0 3.5rem 0;
+    /* Notre approche — mise en page éditoriale */
+    .approach-editorial {
+      padding: clamp(4.5rem, 7vw, 7rem) 1.25rem;
+      background: #FFFFFF;
+    }
+
+    .approach-editorial-inner {
+      width: min(100%, 80rem);
+      margin-inline: auto;
+    }
+
+    .approach-kicker {
+      color: var(--ifpe-medium-blue);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .approach-title {
+      max-width: 50rem;
+      margin-top: .55rem;
+      color: var(--ifpe-dark-blue);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -.03em;
+    }
+
+    .approach-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+      gap: clamp(2.25rem, 5vw, 4.5rem);
+      align-items: stretch;
+      margin-top: clamp(2.25rem, 4vw, 3.25rem);
+    }
+
+    .approach-image-wrap {
+      min-height: 31rem;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 20px 46px rgba(30, 58, 95, .15);
+    }
+
+    .approach-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 500ms ease;
+    }
+
+    .approach-image-wrap:hover .approach-image { transform: scale(1.025); }
+
+    .approach-steps {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.35rem;
+    }
+
+    .approach-step h3 {
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.08);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, color 0.25s ease;
-    }
-
-    .approach-card:hover {
-      background-color: #4FA3D1;
-      color: #FFFFFF;
-      transform: translateY(-8px);
-      box-shadow: 0 24px 45px rgba(79, 163, 209, 0.28);
-    }
-
-    .approach-card span {
-      display: block;
-      font-size: 0.78rem;
+      gap: .75rem;
+      color: #145C9E;
+      font-size: clamp(1.15rem, 2vw, 1.45rem);
       font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      opacity: 0.74;
+      line-height: 1.25;
     }
 
-    @media (max-width: 767px) {
-      .approach-card {
-        min-height: 8rem;
-        border-radius: 2.5rem 0 2.5rem 0;
-        padding: 1.5rem;
-      }
+    .approach-step h3::before {
+      content: '';
+      flex: 0 0 auto;
+      width: 2rem;
+      height: .42rem;
+      border-radius: 999px;
+      background: #4FA3D1;
+    }
+
+    .approach-step p {
+      margin-top: .55rem;
+      padding-left: 2.75rem;
+      color: #44546A;
+      font-size: .94rem;
+      line-height: 1.65;
+    }
+
+    .approach-link {
+      align-self: flex-start;
+      margin-left: 2.75rem;
+      margin-top: .2rem;
+      border-radius: 999px;
+      padding: .85rem 1.55rem;
+      color: #FFFFFF;
+      background: #1464B8;
+      font-size: .9rem;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(20, 100, 184, .2);
+      transition: transform 250ms ease, background-color 250ms ease, box-shadow 250ms ease;
+    }
+
+    .approach-link:hover {
+      transform: translateY(-3px);
+      background: var(--ifpe-dark-blue);
+      box-shadow: 0 14px 28px rgba(30, 58, 95, .25);
+    }
+
+    .approach-link:focus-visible {
+      outline: 3px solid rgba(79, 163, 209, .65);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 899px) {
+      .approach-layout { grid-template-columns: 1fr; }
+      .approach-image-wrap { min-height: 24rem; }
+    }
+
+    @media (max-width: 639px) {
+      .approach-editorial { padding-inline: 1rem; }
+      .approach-image-wrap { min-height: 18rem; }
+      .approach-steps { gap: 1.5rem; }
+      .approach-step p { padding-left: 0; }
+      .approach-link { margin-left: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .approach-image,
+      .approach-link { transition: none; }
+      .approach-image-wrap:hover .approach-image { transform: none; }
     }
 
     .hero-copy {
@@ -252,22 +558,22 @@
     }
 
     .hero-copy {
-      transform: translateY(-10rem);
+      transform: translateY(-3rem);
     }
 
     @media (max-width: 1023px) {
       .page-hero {
-        min-height: 1080px;
+        min-height: 44rem;
       }
 
       .hero-copy {
-        transform: translateY(-7rem);
+        transform: translateY(-1.5rem);
       }
     }
 
     @media (max-width: 767px) {
       .page-hero {
-        min-height: 980px;
+        min-height: 42rem;
         background-image:
           linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.1) 55%, rgba(0, 0, 0, 0.06) 100%),
           url("assets/images/domaines-hero-consulting.png");
@@ -275,16 +581,25 @@
       }
 
       .hero-copy {
-        transform: translateY(-8rem);
+        transform: none;
       }
 
       .stats-panel {
-        padding-bottom: 6rem;
+        padding-bottom: 1.5rem;
       }
 
       .mobile-stats-panel {
-        margin-top: -120px !important;
+        margin-top: -5rem !important;
         top: 0 !important;
+      }
+
+      .stats-blob {
+        top: calc(100% + .75rem);
+        width: min(17rem, calc(100vw - 3rem));
+      }
+
+      .intro-summary {
+        margin-top: 14rem;
       }
 
     }
@@ -632,8 +947,8 @@
 
     </section>
 
-    <section id="intro" class="relative bg-white px-4 pb-24 pt-0">
-      <div class="stats-panel mobile-stats-panel relative z-50 mx-auto w-full max-w-5xl rounded-3xl bg-white p-6 sm:p-8 shadow-soft" style="margin-top: -300px; top: -45px;">
+    <section id="intro" class="relative bg-white px-4 pb-14 pt-0">
+      <div class="stats-panel mobile-stats-panel relative z-50 mx-auto w-full max-w-5xl rounded-3xl bg-white p-6 sm:p-8 shadow-soft" style="margin-top: -9rem; top: 0;">
         <div class="grid gap-6 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-slate-200">
           <div class="text-center pt-0">
             <p class="stats-number text-4xl font-extrabold" data-counter data-target="30" data-prefix="+" data-suffix=" ans">+0 ans</p>
@@ -648,7 +963,7 @@
             <p class="mt-2 text-sm font-semibold text-ink">solutions sur mesure</p>
           </div>
         </div>
-        <div class="expertise-blob stats-blob absolute -bottom-60 left-1/2 flex -translate-x-1/2 items-center justify-center p-8 text-center text-white">
+        <div class="expertise-blob stats-blob absolute left-1/2 flex -translate-x-1/2 items-center justify-center p-8 text-center text-white">
           <div>
             <p class="text-4xl font-extrabold leading-none" data-counter data-target="30" data-prefix="+" data-suffix=" ans">+0 ans</p>
             <p class="mt-3 text-base font-semibold leading-snug">d'expertise au service<br />de la performance</p>
@@ -656,7 +971,7 @@
         </div>
       </div>
 
-      <div class="max-w-3xl mx-auto mt-72 text-center">
+      <div class="intro-summary max-w-3xl mx-auto text-center">
         <h2 class="text-3xl lg:text-4xl font-extrabold text-navy leading-tight">Des expertises complémentaires au service de votre performance</h2>
         <div class="mx-auto mt-6 mb-7 h-1 w-20 rounded-full bg-light"></div>
         <p class="text-base lg:text-lg leading-relaxed text-gray-600">
@@ -665,29 +980,45 @@
       </div>
     </section>
 
-    <section id="domaines" class="bg-silver py-24">
-      <div class="w-full">
-        <div class="mx-auto mb-16 max-w-3xl px-4 text-center">
-          <span class="inline-block rounded-full bg-light/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-light">Expertises</span>
-          <h2 class="mt-5 text-3xl lg:text-4xl font-extrabold text-navy">Nos domaines d'intervention</h2>
-          <div class="mx-auto mt-5 mb-6 h-1 w-20 rounded-full bg-light"></div>
-          <p class="text-base leading-relaxed text-gray-600">
-            Des domaines complémentaires pour accompagner la performance, les ressources humaines, la formation et la transformation des organisations.
-          </p>
-        </div>
+    <section id="domaines" class="domain-hex-section">
+      <div aria-hidden="true">
+        <span class="domain-bg-hex"></span><span class="domain-bg-hex"></span>
+        <span class="domain-bg-hex"></span><span class="domain-bg-hex"></span>
+      </div>
+
+      <div class="domain-hex-inner">
+        <header class="domain-hex-heading">
+          <h2>Nos domaines d’intervention</h2>
+          <div class="domain-heading-rule" aria-hidden="true"></div>
+          <p>Des expertises complémentaires au service de la performance et de la transformation des organisations.</p>
+        </header>
 
         <div class="w-full">
-          <div class="hidden">
-            <button type="button" class="domain-switch-button active min-w-64 rounded-2xl bg-white/70 px-5 py-4 text-left text-sm font-extrabold text-navy" data-domain-target="organisation">Développement organisationnel</button>
-            <button type="button" class="domain-switch-button min-w-64 rounded-2xl bg-white/70 px-5 py-4 text-left text-sm font-extrabold text-ink" data-domain-target="rh">Ressources humaines</button>
-            <button type="button" class="domain-switch-button min-w-64 rounded-2xl bg-white/70 px-5 py-4 text-left text-sm font-extrabold text-ink" data-domain-target="formation">Formation professionnelle</button>
-            <button type="button" class="domain-switch-button min-w-64 rounded-2xl bg-white/70 px-5 py-4 text-left text-sm font-extrabold text-ink" data-domain-target="referentiels">Études et référentiels</button>
-            <button type="button" class="domain-switch-button min-w-64 rounded-2xl bg-white/70 px-5 py-4 text-left text-sm font-extrabold text-ink" data-domain-target="digital">Transformation numérique & IA</button>
-            <button type="button" class="domain-switch-button min-w-64 rounded-2xl bg-white/70 px-5 py-4 text-left text-sm font-extrabold text-ink" data-domain-target="strategie">Stratégie et changement</button>
-            <button type="button" class="domain-switch-button min-w-64 rounded-2xl bg-white/70 px-5 py-4 text-left text-sm font-extrabold text-ink" data-domain-target="coaching">Coaching professionnel</button>
+          <div class="domain-honeycomb" aria-label="Domaines d’intervention IFPE Conseil">
+            <a href="domaine-detail.html?d=organisation" class="domain-hex-card">
+              <img class="domain-hex-image" src="assets/images/domaine-developpement-organisationnel-transparent.png" alt="Développement organisationnel" />
+            </a>
+            <a href="domaine-detail.html?d=rh" class="domain-hex-card">
+              <img class="domain-hex-image" src="assets/images/domaine-ressources-humaines-transparent.png" alt="Ressources humaines" />
+            </a>
+            <a href="domaine-detail.html?d=formation" class="domain-hex-card">
+              <img class="domain-hex-image" src="assets/images/domaine-formation-professionnelle-transparent.png" alt="Formation professionnelle" />
+            </a>
+            <a href="domaine-detail.html?d=referentiels" class="domain-hex-card">
+              <img class="domain-hex-image" src="assets/images/domaine-etudes-referentiels-transparent.png" alt="Études et référentiels" />
+            </a>
+            <a href="domaine-detail.html?d=digital" class="domain-hex-card">
+              <img class="domain-hex-image" src="assets/images/domaine-transformation-numerique-ia-transparent.png" alt="Transformation numérique et IA" />
+            </a>
+            <a href="domaine-detail.html?d=strategie" class="domain-hex-card">
+              <img class="domain-hex-image" src="assets/images/domaine-planification-strategique-transparent.png" alt="Planification stratégique" />
+            </a>
+            <a href="domaine-detail.html?d=coaching" class="domain-hex-card">
+              <img class="domain-hex-image" src="assets/images/domaine-coaching-professionnel-transparent.png" alt="Coaching professionnel" />
+            </a>
           </div>
 
-          <div class="domains-carousel relative w-full overflow-hidden bg-white shadow-soft">
+          <div class="domains-carousel hidden" aria-hidden="true">
             <button type="button" id="domain-side-prev" class="absolute left-4 top-1/2 z-20 hidden h-14 w-14 -translate-y-1/2 items-center justify-center rounded-full bg-white/95 text-navy shadow-soft transition-all hover:-translate-x-1 hover:bg-light hover:text-white lg:flex" aria-label="Image précédente">
               <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" d="M15 19l-7-7 7-7"/></svg>
             </button>
@@ -695,7 +1026,6 @@
               <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" d="M9 5l7 7-7 7"/></svg>
             </button>
             <article class="domain-panel is-active" data-domain-panel="organisation">
-              <img src="assets/images/domain-organisation-performance.png" alt="Développement organisationnel et amélioration de la performance" class="rounded-2xl shadow-card" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Développement organisationnel et amélioration de la performance</h3>
@@ -715,7 +1045,6 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="rh">
-              <img src="assets/images/domain-rh-strategique.png" alt="Gestion stratégique des ressources humaines" class="rounded-2xl shadow-card" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Gestion stratégique des ressources humaines</h3>
@@ -735,7 +1064,6 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="formation">
-              <img src="assets/images/domain-formation-competences.png" alt="Formation professionnelle et développement des compétences" class="rounded-2xl shadow-card" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Formation professionnelle et développement des compétences</h3>
@@ -755,7 +1083,6 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="referentiels">
-              <img src="assets/images/domain-etudes-referentiels.png" alt="Études, ingénierie et référentiels" class="rounded-2xl shadow-card" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Études, ingénierie et référentiels</h3>
@@ -775,7 +1102,6 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="digital">
-              <img src="assets/images/domain-transformation-numerique-ia.png" alt="Transformation numérique et intelligence artificielle" class="rounded-2xl shadow-card" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Transformation numérique et intelligence artificielle</h3>
@@ -795,7 +1121,6 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="strategie">
-              <img src="assets/images/domain-strategie-changement.png" alt="Planification stratégique et accompagnement du changement" class="rounded-2xl shadow-card" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Planification stratégique et accompagnement du changement</h3>
@@ -815,7 +1140,6 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="coaching">
-              <img src="assets/images/domain-coaching-equipes.png" alt="Coaching professionnel et mobilisation des équipes" class="rounded-2xl shadow-card" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Coaching professionnel et mobilisation des équipes</h3>
@@ -835,7 +1159,7 @@
             </article>
           </div>
 
-          <div class="mt-8 flex items-center justify-center gap-5">
+          <div class="hidden" aria-hidden="true">
             <button type="button" id="domain-prev" class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-navy shadow-card transition-all hover:-translate-y-0.5 hover:bg-light hover:text-white" aria-label="Image précédente">
               <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
             </button>
@@ -848,43 +1172,44 @@
       </div>
     </section>
 
-    <section class="bg-navy px-4 py-24 lg:py-28">
-      <div class="mx-auto max-w-7xl">
-        <div class="mx-auto mb-14 max-w-4xl text-center lg:mb-20">
-          <h2 class="text-4xl font-extrabold leading-tight tracking-normal text-white sm:text-5xl lg:text-6xl">Notre approche d'intervention</h2>
-        </div>
+    <section class="approach-editorial">
+      <div class="approach-editorial-inner">
+        <p class="approach-kicker">Notre méthode</p>
+        <h2 class="approach-title">Notre approche d’intervention</h2>
 
-        <div class="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-6 lg:gap-x-7 lg:gap-y-8">
-          <article class="approach-card bg-white text-navy lg:col-span-2">
-            <div>
-              <span>Étape 1</span>
-              <h3 class="mt-3 text-xl font-extrabold leading-snug lg:text-2xl">Diagnostic de la situation</h3>
-            </div>
-          </article>
-          <article class="approach-card bg-white text-navy lg:col-span-2">
-            <div>
-              <span>Étape 2</span>
-              <h3 class="mt-3 text-xl font-extrabold leading-snug lg:text-2xl">Analyse des besoins</h3>
-            </div>
-          </article>
-          <article class="approach-card bg-white text-navy lg:col-span-2">
-            <div>
-              <span>Étape 3</span>
-              <h3 class="mt-3 text-xl font-extrabold leading-snug lg:text-2xl">Solutions adaptées</h3>
-            </div>
-          </article>
-          <article class="approach-card bg-white text-navy lg:col-span-2 lg:col-start-2">
-            <div>
-              <span>Étape 4</span>
-              <h3 class="mt-3 text-xl font-extrabold leading-snug lg:text-2xl">Mise en œuvre</h3>
-            </div>
-          </article>
-          <article class="approach-card bg-white text-navy lg:col-span-2 lg:col-start-4">
-            <div>
-              <span>Étape 5</span>
-              <h3 class="mt-3 text-xl font-extrabold leading-snug lg:text-2xl">Amélioration continue</h3>
-            </div>
-          </article>
+        <div class="approach-layout">
+          <div class="approach-image-wrap">
+            <img
+              src="assets/images/service-diagnostic-organisationnel.png"
+              alt="Consultant IFPE présentant un diagnostic organisationnel à une équipe"
+              class="approach-image"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="approach-steps">
+            <article class="approach-step">
+              <h3>Diagnostic de la situation</h3>
+              <p>Comprendre votre contexte, vos enjeux et les leviers prioritaires d’amélioration.</p>
+            </article>
+            <article class="approach-step">
+              <h3>Analyse des besoins</h3>
+              <p>Identifier précisément les attentes, les écarts et les résultats à atteindre.</p>
+            </article>
+            <article class="approach-step">
+              <h3>Solutions adaptées</h3>
+              <p>Concevoir une réponse sur mesure, réaliste et alignée sur vos objectifs.</p>
+            </article>
+            <article class="approach-step">
+              <h3>Mise en œuvre</h3>
+              <p>Déployer les actions avec vos équipes et piloter chaque étape de la transformation.</p>
+            </article>
+            <article class="approach-step">
+              <h3>Amélioration continue</h3>
+              <p>Mesurer les résultats, ajuster les dispositifs et pérenniser les progrès obtenus.</p>
+            </article>
+            <a href="contact.html" class="approach-link">En savoir plus</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1017,13 +1342,40 @@
         counters.forEach(animateCounter);
       }
 
+      /* Apparition progressive des domaines hexagonaux */
+      const domainHexCards = Array.from(document.querySelectorAll('.domain-hex-card'));
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (domainHexCards.length && 'IntersectionObserver' in window && !reduceMotion) {
+        domainHexCards.forEach((card, index) => {
+          card.classList.add('domain-reveal-pending');
+          card.style.setProperty('--reveal-delay', `${index * 85}ms`);
+        });
+
+        const domainHexObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            entry.target.addEventListener('transitionend', () => {
+              entry.target.classList.remove('domain-reveal-pending');
+              entry.target.style.removeProperty('--reveal-delay');
+            }, { once: true });
+            domainHexObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.18 });
+
+        domainHexCards.forEach(card => domainHexObserver.observe(card));
+      }
+
       const domainPanels = Array.from(document.querySelectorAll('.domain-panel'));
       const prevDomain = document.getElementById('domain-prev');
       const nextDomain = document.getElementById('domain-next');
       const sidePrevDomain = document.getElementById('domain-side-prev');
       const sideNextDomain = document.getElementById('domain-side-next');
       const domainDots = document.getElementById('domain-dots');
-      let activeDomain = 0;
+      const requestedDomain = new URLSearchParams(window.location.search).get('d');
+      const requestedDomainIndex = domainPanels.findIndex(panel => panel.dataset.domainPanel === requestedDomain);
+      let activeDomain = requestedDomainIndex >= 0 ? requestedDomainIndex : 0;
 
       function domainOffset(index) {
         const total = domainPanels.length;
