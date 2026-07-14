@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (domainMenuVisual) {
       domainMenuVisual.innerHTML = `
         <div id="domain-menu-preview" class="domain-menu-preview relative h-[330px] w-full overflow-hidden rounded-2xl bg-navy">
-          <img id="domain-menu-preview-image" src="assets/images/menu-domain-organisation.jpg" alt="Développement organisationnel" class="protected-image h-full w-full object-cover" draggable="false" />
+          <img id="domain-menu-preview-image" src="assets/images/menu-domain-organisation.webp" alt="Développement organisationnel" class="protected-image h-full w-full object-cover" draggable="false" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#173A63]/95 via-[#173A63]/45 to-transparent"></div>
           <div class="absolute inset-x-0 bottom-0 p-6 text-white">
             <p class="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">IFPE Conseil</p>
@@ -242,14 +242,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const domainPreviewText = document.getElementById('domain-menu-preview-text');
 
   const domainPreviewData = [
-    ['assets/images/menu-domain-organisation.jpg', 'Développement organisationnel', 'Améliorer durablement l’organisation, les processus et la performance.'],
-    ['assets/images/menu-domain-rh.png', 'Ressources humaines', 'Structurer les compétences, les parcours et la performance des équipes.'],
-    ['assets/images/menu-domain-formation.png', 'Formation professionnelle', 'Développer les compétences grâce à des dispositifs pédagogiques adaptés.'],
-    ['assets/images/menu-domain-etudes.png', 'Études et référentiels', 'Concevoir des études, référentiels métiers et outils d’aide à la décision.'],
-    ['assets/images/transformation-numerique-ia.jpg', 'Transformation numérique et IA', 'Digitaliser les processus et intégrer l’intelligence artificielle avec méthode.'],
-    ['assets/images/menu-domain-strategie.jpg', 'Planification stratégique', 'Transformer la vision en feuilles de route concrètes et mobilisatrices.'],
-    ['assets/images/coaching-professionnel.jpg', 'Coaching professionnel', 'Renforcer le leadership, la cohésion et la mobilisation des équipes.']
+    ['assets/images/menu-domain-organisation.webp', 'Développement organisationnel', 'Améliorer durablement l’organisation, les processus et la performance.'],
+    ['assets/images/menu-domain-rh.webp', 'Ressources humaines', 'Structurer les compétences, les parcours et la performance des équipes.'],
+    ['assets/images/menu-domain-formation.webp', 'Formation professionnelle', 'Développer les compétences grâce à des dispositifs pédagogiques adaptés.'],
+    ['assets/images/menu-domain-etudes.webp', 'Études et référentiels', 'Concevoir des études, référentiels métiers et outils d’aide à la décision.'],
+    ['assets/images/transformation-numerique-ia.webp', 'Transformation numérique et IA', 'Digitaliser les processus et intégrer l’intelligence artificielle avec méthode.'],
+    ['assets/images/menu-domain-strategie.webp', 'Planification stratégique', 'Transformer la vision en feuilles de route concrètes et mobilisatrices.'],
+    ['assets/images/coaching-professionnel.webp', 'Coaching professionnel', 'Renforcer le leadership, la cohésion et la mobilisation des équipes.']
   ];
+  const domainPreviewImages = {
+    'assets/images/menu-domain-organisation.webp': { width: 1200, height: 800, srcset: 'assets/images/menu-domain-organisation-400.webp 400w, assets/images/menu-domain-organisation-800.webp 800w, assets/images/menu-domain-organisation.webp 1200w' },
+    'assets/images/menu-domain-rh.webp': { width: 945, height: 1665, srcset: 'assets/images/menu-domain-rh-400.webp 400w, assets/images/menu-domain-rh-800.webp 800w, assets/images/menu-domain-rh.webp 945w' },
+    'assets/images/menu-domain-formation.webp': { width: 412, height: 564, srcset: 'assets/images/menu-domain-formation-400.webp 400w, assets/images/menu-domain-formation.webp 412w' },
+    'assets/images/menu-domain-etudes.webp': { width: 1023, height: 1537, srcset: 'assets/images/menu-domain-etudes-400.webp 400w, assets/images/menu-domain-etudes-800.webp 800w, assets/images/menu-domain-etudes.webp 1023w' },
+    'assets/images/transformation-numerique-ia.webp': { width: 1200, height: 800, srcset: 'assets/images/transformation-numerique-ia-400.webp 400w, assets/images/transformation-numerique-ia-800.webp 800w, assets/images/transformation-numerique-ia.webp 1200w' },
+    'assets/images/menu-domain-strategie.webp': { width: 1200, height: 801, srcset: 'assets/images/menu-domain-strategie-400.webp 400w, assets/images/menu-domain-strategie-800.webp 800w, assets/images/menu-domain-strategie.webp 1200w' },
+    'assets/images/coaching-professionnel.webp': { width: 346, height: 346, srcset: '' }
+  };
   const domainPageTargets = ['organisation', 'rh', 'formation', 'referentiels', 'digital', 'strategie', 'coaching'];
   let domainPreviewTimer = null;
 
@@ -266,7 +275,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.clearTimeout(domainPreviewTimer);
 
     domainPreviewTimer = window.setTimeout(() => {
+      const responsiveImage = domainPreviewImages[image];
       domainPreviewImage.src = image;
+      domainPreviewImage.srcset = responsiveImage.srcset;
+      domainPreviewImage.sizes = '(min-width: 1024px) 330px, 100vw';
+      domainPreviewImage.width = responsiveImage.width;
+      domainPreviewImage.height = responsiveImage.height;
       domainPreviewImage.alt = title;
       domainPreviewTitle.textContent = title;
       domainPreviewText.textContent = description;
@@ -799,13 +813,13 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const images = [
-    "assets/images/domain-organisation-performance.gif",
-    "assets/images/domain-rh-strategique.gif",
-    "assets/images/domain-formation-competences.gif",
-    "assets/images/domain-etudes-referentiels.gif",
-    "assets/images/domain-transformation-numerique-ia.gif",
-    "assets/images/domain-strategie-changement.gif",
-    "assets/images/domain-coaching-equipes.gif"
+    "assets/images/domain-organisation-performance.webp",
+    "assets/images/domain-rh-strategique.webp",
+    "assets/images/domain-formation-competences.webp",
+    "assets/images/domain-etudes-referentiels.webp",
+    "assets/images/domain-transformation-numerique-ia.webp",
+    "assets/images/domain-strategie-changement.webp",
+    "assets/images/domain-coaching-equipes.webp"
   ];
 
   const items = [...section.querySelectorAll('ol > li')];
@@ -831,7 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
     panel.innerHTML = `
       <div>
         <div class="domain-accordion-content">
-          <img class="protected-image domain-icon" src="${images[index]}" alt="" loading="lazy" draggable="false" />
+          <img class="protected-image domain-icon" src="${images[index]}" srcset="${images[index].replace('.webp', '-320.webp')} 320w, ${images[index]} 640w" sizes="82px" alt="" width="640" height="640" loading="lazy" decoding="async" draggable="false" />
           <p>${descriptions[index]}</p>
         </div>
       </div>`;
