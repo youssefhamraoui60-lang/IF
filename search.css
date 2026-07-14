@@ -1,0 +1,145 @@
+.search-page-main {
+  min-height: 70vh;
+  padding: clamp(10rem, 15vw, 12rem) 1.25rem 6rem;
+  color: #44546a;
+  background: #fff;
+}
+
+.search-page-shell {
+  width: min(100%, 76rem);
+  margin-inline: auto;
+}
+
+.search-page-heading {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #dde6ef;
+}
+
+.search-page-kicker {
+  margin: 0 0 .7rem;
+  color: #2f6fa3;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.search-page-heading h1 {
+  margin: 0;
+  color: #1e3a5f;
+  font-size: clamp(2.5rem, 5vw, 4.75rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+#search-query {
+  margin: 1.15rem 0 0;
+  color: #2f6fa3;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 700;
+}
+
+#search-summary {
+  margin: .45rem 0 0;
+  color: #64748b;
+  font-size: .96rem;
+}
+
+.search-results-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.25rem;
+}
+
+.search-result-card {
+  padding: clamp(1.35rem, 2.8vw, 2rem);
+  border: 1px solid transparent;
+  border-radius: 1.15rem;
+  background: #f5f7fa;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.search-result-card:hover {
+  border-color: rgba(47, 111, 163, .24);
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(30, 58, 95, .1);
+  transform: translateY(-2px);
+}
+
+.search-result-card h2 {
+  margin: 0;
+  color: #1e3a5f;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.search-result-card h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.search-result-card h2 a:hover {
+  color: #2f6fa3;
+}
+
+.search-result-card p {
+  margin: .7rem 0 0;
+  color: #526176;
+  font-size: .94rem;
+  line-height: 1.75;
+}
+
+.search-result-card mark {
+  padding: .05em .14em;
+  color: #173a63;
+  border-radius: .2rem;
+  background: #cfe6f7;
+  font-weight: 800;
+}
+
+.search-result-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: 1rem;
+  color: #2f6fa3;
+  font-size: .86rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.search-result-link:hover {
+  color: #1e3a5f;
+}
+
+.search-empty {
+  padding: clamp(2rem, 5vw, 4rem);
+  border: 1px solid #dde6ef;
+  border-radius: 1.15rem;
+  background: #f5f7fa;
+  text-align: center;
+}
+
+.search-empty p {
+  max-width: 42rem;
+  margin: 0 auto;
+  color: #526176;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 639px) {
+  .search-page-main {
+    padding: 8.5rem .9rem 4rem;
+  }
+
+  .search-page-heading {
+    padding-inline: .35rem;
+  }
+
+  .search-result-card {
+    border-radius: .9rem;
+  }
+}

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -79,22 +79,222 @@
       outline: none;
     }
 
+    #formulaire {
+      background-image:
+        linear-gradient(rgba(245, 249, 253, 0.34), rgba(245, 249, 253, 0.34)),
+        url("assets/images/contact-page-background.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+    }
+
+    .contact-radio {
+      width: 1rem;
+      height: 1rem;
+      accent-color: var(--ifpe-medium-blue);
+    }
+
+    .contact-radio-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      cursor: pointer;
+    }
+
+    .contact-radio-group.is-invalid {
+      color: #dc2626;
+    }
+
+    .contact-page-section {
+      min-height: 100vh;
+      padding: 9.8rem 1.25rem 3.5rem;
+    }
+
+    .contact-page-layout {
+      display: grid;
+      grid-template-columns: minmax(20.5rem, 0.82fr) minmax(0, 1.58fr);
+      gap: clamp(2.5rem, 5vw, 4.5rem);
+      width: min(100%, 72rem);
+      margin-inline: auto;
+      align-items: start;
+    }
+
+    .contact-page-intro { padding-top: 1.6rem; }
+
+    .contact-page-title {
+      margin: 0;
+      color: var(--ifpe-dark-blue);
+      font-family: Inter, system-ui, sans-serif;
+      font-size: clamp(2.35rem, 3.8vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      white-space: nowrap;
+    }
+
+    .contact-page-rule {
+      width: 3rem;
+      height: 0.2rem;
+      margin: 1rem 0 1.35rem;
+      border-radius: 999px;
+      background: var(--ifpe-medium-blue);
+    }
+
+    .contact-page-lead {
+      max-width: 20rem;
+      margin: 0;
+      color: #334e68;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    .contact-info-card {
+      max-width: 22rem;
+      margin-top: 1.4rem;
+      padding: 0.85rem 1.2rem;
+      border-radius: 0.8rem;
+      color: #fff;
+      background: linear-gradient(145deg, #0b4e8b, #073969);
+      box-shadow: 0 16px 32px rgba(13, 59, 103, 0.2);
+    }
+
+    .contact-info-row {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.52rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .contact-info-row:last-child { border-bottom: 0; }
+
+    .contact-info-icon {
+      display: inline-flex;
+      width: 2.15rem;
+      height: 2.15rem;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      border-radius: 999px;
+    }
+
+    .contact-info-icon svg {
+      display: block;
+      width: 1.05rem;
+      height: 1.05rem;
+      margin: auto;
+    }
+
+    .contact-info-row strong,
+    .contact-info-row > span:not(.contact-info-icon),
+    .contact-info-row a {
+      display: block;
+      color: #fff;
+      font-size: 0.75rem;
+      line-height: 1.45;
+    }
+
+    .contact-info-row strong {
+      margin-bottom: 0.1rem;
+      font-size: 0.88rem;
+    }
+
+    .contact-form-card {
+      overflow: hidden;
+      padding: clamp(1.25rem, 2.2vw, 1.75rem);
+      border: 1px solid rgba(30, 58, 95, 0.12);
+      border-top: 0.25rem solid var(--ifpe-medium-blue);
+      border-radius: 0.55rem;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 14px 34px rgba(30, 58, 95, 0.13);
+    }
+
+    .contact-form-title {
+      margin: 0;
+      color: var(--ifpe-dark-blue);
+      font-family: Inter, system-ui, sans-serif;
+      font-size: clamp(1.55rem, 2.2vw, 1.85rem);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .contact-form-card > div > .mb-6 { margin-bottom: 1rem; }
+
+    .contact-form-card form > .grid {
+      column-gap: 1.15rem;
+      row-gap: 0.8rem;
+    }
+
+    .contact-form-card .contact-input {
+      min-height: 2.55rem;
+      padding: 0.62rem 0.9rem !important;
+    }
+
+    .contact-form-card textarea.contact-input {
+      width: 100%;
+      height: 5.8rem;
+      min-height: 5.8rem;
+    }
+
+    .contact-form-card label,
+    .contact-form-card legend {
+      margin-bottom: 0.3rem !important;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .contact-form-card .contact-radio-group legend {
+      margin-bottom: 0.5rem !important;
+    }
+
+    .contact-form-card .contact-radio-group .flex {
+      gap: 1.5rem;
+    }
+
+    .contact-form-card button[type="submit"] {
+      margin-top: 1rem;
+      padding-block: 0.8rem;
+    }
+
+    @media (max-width: 1023px) {
+      .contact-page-layout { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+      .contact-page-intro { padding-top: 0; }
+      .contact-page-title { white-space: normal; }
+      .contact-page-lead { max-width: 38rem; }
+    }
+
     #presentation,
     #formulaire,
     #coordonnees {
       scroll-margin-top: 9rem;
     }
+
+    @media (max-width: 767px) {
+      #formulaire {
+        background-attachment: scroll;
+        background-position: center top;
+      }
+
+      .contact-page-section { padding: 8.7rem 1rem 3rem; }
+      .contact-page-layout { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+      .contact-page-intro { padding-top: 0; }
+      .contact-page-lead { max-width: 100%; }
+    }
   </style>
 </head>
 
 <body class="font-sans text-ink bg-white antialiased">
+
   <!-- ===== HEADER ===== -->
   <header id="site-header" class="fixed top-0 left-0 right-0 z-[1000] px-4 pt-5 pb-3">
     <div class="header-pill relative z-20 max-w-[92rem] mx-auto bg-white/95 backdrop-blur-xl rounded-3xl border border-white/80 shadow-[0_18px_55px_rgba(0,65,127,0.14)] px-4 lg:px-5 py-4 flex items-center gap-4 transition-all duration-300">
 
       <!-- Logo -->
       <a href="index.html" class="flex-shrink-0">
-        <img src="assets/logo.png" alt="IFPE Conseil" class="h-12 2xl:h-14 w-auto" />
+        <img src="assets/logo.png" alt="IFPE Conseil" class="protected-image h-12 2xl:h-14 w-auto" draggable="false" />
       </a>
 
       <!-- Nav desktop -->
@@ -137,7 +337,7 @@
 
       <!-- Right icons -->
       <div class="flex items-center gap-2 ml-auto">
-        <button id="search-toggle" type="button" aria-label="Ouvrir la recherche" class="hidden md:inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[#cfdbea] bg-white text-navy shadow-inner shadow-navy/5 hover:border-blue hover:text-blue transition-colors">
+        <button id="search-toggle" type="button" aria-label="Ouvrir la recherche" class="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-2xl border border-[#cfdbea] bg-white text-navy shadow-inner shadow-navy/5 hover:border-blue hover:text-blue transition-colors">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
         </button>
 
@@ -224,7 +424,7 @@
           <p class="text-sm leading-relaxed text-gray-600">Des solutions intégrées pour accompagner la performance, la transformation et le développement durable des organisations.</p>
         </div>
         <!-- Col centrale -->
-        <div class="p-8 border-r border-silver flex flex-col gap-2">
+        <div class="domain-menu-list p-8 border-r border-silver flex flex-col gap-2">
           <a href="domaines.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-silver transition-colors group">
             <span class="w-2 h-2 rounded-full bg-green flex-shrink-0"></span>
             <span class="text-sm font-medium text-ink group-hover:text-navy">Développement organisationnel</span>
@@ -254,18 +454,16 @@
             <span class="text-sm font-medium text-ink group-hover:text-navy">Coaching professionnel</span>
           </a>
         </div>
-        <!-- Col droite – carte visuelle -->
+        <!-- Col droite – aperçu dynamique -->
         <div class="p-8 flex items-center justify-center">
-          <div class="w-full rounded-2xl overflow-hidden" style="background: linear-gradient(135deg, var(--ifpe-dark-blue) 0%, var(--ifpe-medium-blue) 50%, var(--ifpe-light-blue) 100%);">
-            <div class="p-8 text-white">
-              <p class="text-xs font-semibold uppercase tracking-widest opacity-75 mb-3">IFPE Conseil</p>
-              <h4 class="text-xl font-bold mb-3 leading-snug">Expertise, conseil et formation</h4>
-              <p class="text-sm opacity-80 leading-relaxed">Accompagner les organisations dans leur transformation et leur montée en performance.</p>
-              <div class="mt-6 flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-medium">Conseil</span>
-                <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-medium">Formation</span>
-                <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-medium">Performance</span>
-              </div>
+          <div id="domain-menu-preview" class="domain-menu-preview relative h-[330px] w-full overflow-hidden rounded-2xl bg-navy">
+            <img id="domain-menu-preview-image" src="assets/images/menu-domain-organisation.jpg" alt="Développement organisationnel" class="protected-image h-full w-full object-cover" draggable="false" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#173A63]/95 via-[#173A63]/45 to-transparent"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-white">
+              <p class="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">IFPE Conseil</p>
+              <h4 id="domain-menu-preview-title" class="text-xl font-bold leading-snug">Développement organisationnel</h4>
+              <p id="domain-menu-preview-text" class="mt-2 text-xs leading-5 text-white/85">Améliorer durablement l’organisation, les processus et la performance.</p>
+              <span class="mt-4 inline-flex items-center gap-2 text-xs font-bold">En savoir plus <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/></svg></span>
             </div>
           </div>
         </div>
@@ -333,6 +531,7 @@
           <span class="inline-block px-3 py-1 bg-green/10 text-green text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">Valeur ajoutée</span>
           <h3 class="text-2xl font-bold text-navy mb-4">Ce qui nous distingue</h3>
           <p class="text-sm leading-relaxed text-gray-600">Trois piliers fondamentaux qui font d'IFPE Conseil un partenaire de confiance pour votre performance durable.</p>
+          <a href="valeur-ajoutee.html" class="mt-5 inline-flex text-sm font-bold text-blue hover:text-navy">Découvrir notre valeur ajoutée →</a>
         </div>
         <div class="p-8 border-r border-silver flex flex-col gap-4">
           <div class="p-5 rounded-2xl bg-silver">
@@ -370,7 +569,7 @@
     <div id="search-bar" class="hidden max-w-3xl mx-auto mt-3 px-2">
       <div class="bg-white rounded-2xl border border-silver shadow-2xl shadow-navy/15 px-6 py-4 flex items-center gap-4">
         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
-        <input type="search" placeholder="Rechercher sur IFPE Conseil..." class="flex-1 outline-none text-sm text-ink placeholder-gray-400" />
+        <input type="search" placeholder="Rechercher sur IFPE Conseil…" class="flex-1 outline-none text-sm text-ink placeholder-gray-400" />
         <button id="search-close" class="text-gray-400 hover:text-navy transition-colors">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
@@ -382,7 +581,7 @@
   <div id="mobile-menu" class="fixed inset-0 z-[1010] bg-white transform -translate-x-full transition-transform duration-300 overflow-y-auto lg:hidden">
     <div class="p-6">
       <div class="flex items-center justify-between mb-8">
-        <img src="assets/logo.png" alt="IFPE Conseil" class="h-12 w-auto" />
+        <img src="assets/logo.png" alt="IFPE Conseil" class="protected-image h-12 w-auto" draggable="false" />
         <button id="mobile-close" class="p-2 rounded-xl hover:bg-silver transition-colors">
           <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
@@ -391,7 +590,7 @@
         <a href="index.html#qui" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Qui sommes-nous ?</a>
         <a href="domaines.html" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Domaines d'intervention</a>
         <a href="services.html" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Nos services</a>
-        <a href="index.html#valeur" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Notre valeur ajoutée</a>
+        <a href="valeur-ajoutee.html" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Notre valeur ajoutée</a>
         <a href="contact.html" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Contact</a>
         <a href="contact.html" class="mt-4 flex items-center justify-center gap-2 px-6 py-3 bg-navy text-white rounded-xl text-sm font-semibold hover:bg-blue transition-colors">Nous contacter</a>
       </nav>
@@ -401,94 +600,110 @@
 
   <!-- ===== MAIN CONTENT ===== -->
   <main>
-    <section class="contact-hero relative flex items-center overflow-hidden px-4 pt-36 pb-20 text-white">
-      <div class="mx-auto w-full max-w-7xl">
-        <span class="mb-5 inline-flex items-center gap-3 text-xs font-extrabold uppercase tracking-[0.22em] text-white/80">
-          <span class="h-px w-12 bg-green"></span>
-          Contact
-        </span>
-        <h1 class="max-w-4xl text-4xl font-extrabold leading-tight tracking-normal sm:text-5xl lg:text-6xl">Parlons de votre projet</h1>
-        <p class="mt-6 max-w-3xl text-base leading-relaxed text-white/82 sm:text-lg lg:text-xl">
-          Un Ã©change personnalisÃ© pour comprendre vos enjeux, clarifier vos besoins et identifier l'accompagnement le plus adaptÃ©.
-        </p>
-        <div class="mt-9 flex flex-col gap-4 sm:flex-row">
-          <a href="#formulaire" class="inline-flex h-14 items-center justify-center rounded-2xl bg-green px-7 text-sm font-extrabold text-white shadow-lg shadow-black/15 transition-all hover:-translate-y-0.5 hover:bg-white hover:text-navy">
-            DÃ©crire mon projet
-          </a>
-          <a href="#coordonnees" class="inline-flex h-14 items-center justify-center rounded-2xl border border-white/40 bg-white/10 px-7 text-sm font-extrabold text-white backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white hover:text-navy">
-            Voir les coordonnÃ©es
-          </a>
-        </div>
-      </div>
-    </section>
+    <section id="formulaire" class="contact-page-section">
+      <div class="contact-page-layout">
+        <aside class="contact-page-intro" aria-labelledby="contact-page-title">
+          <h1 id="contact-page-title" class="contact-page-title">Nous contacter</h1>
+          <div class="contact-page-rule" aria-hidden="true"></div>
+          <p class="contact-page-lead">Vous avez une question, un projet de formation ou un besoin d’accompagnement&nbsp;? Notre équipe est à votre écoute et vous répondra dans les meilleurs délais.</p>
 
-    <section class="px-4 py-20 lg:py-20">
-      <div class="mx-auto max-w-4xl text-center">
-        <span class="mb-4 inline-flex rounded-full bg-blue/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wider text-blue">Premier Ã©change</span>
-        <h2 class="text-3xl font-extrabold leading-tight text-navy lg:text-4xl">Un contact direct, clair et orientÃ© solutions</h2>
-        <p class="mt-6 text-base leading-relaxed text-ink lg:text-lg">
-          Que votre besoin concerne le diagnostic organisationnel, l'optimisation des processus, la formation, les rÃ©fÃ©rentiels mÃ©tiers, la transformation numÃ©rique ou le coaching, IFPE Conseil vous accompagne avec une approche structurÃ©e et sur mesure.
-        </p>
-      </div>
-    </section>
+          <div class="contact-info-card" aria-label="Coordonnées d’IFPE Conseil">
+            <div class="contact-info-row">
+              <span class="contact-info-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 21s7-5.1 7-12a7 7 0 1 0-14 0c0 6.9 7 12 7 12Z"/><circle cx="12" cy="9" r="2.4"/></svg></span>
+              <span><strong>IFPE Conseil</strong>Adresse complète<br>Ville, Code postal, Pays</span>
+            </div>
+            <div class="contact-info-row">
+              <span class="contact-info-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.5 5.5c0 7.7 6.3 14 14 14l2-4.2-4.8-2.1-1.8 2.2a12.3 12.3 0 0 1-5.3-5.3l2.2-1.8-2.1-4.8-4.2 2Z"/></svg></span>
+              <a href="tel:+212500000000">+212 5 XX XX XX XX</a>
+            </div>
+            <div class="contact-info-row">
+              <span class="contact-info-icon"><svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2a9.82 9.82 0 0 0-8.5 14.74L2 22l5.4-1.42A9.99 9.99 0 0 0 12.04 22 9.96 9.96 0 0 0 12.04 2Zm0 18.18a8.14 8.14 0 0 1-4.14-1.13l-.3-.18-3.2.84.86-3.11-.2-.32a8 8 0 1 1 6.98 3.9Zm4.47-6.08c-.25-.12-1.45-.71-1.67-.8-.23-.08-.39-.12-.55.13-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.25-.12-1.03-.38-1.97-1.22a7.4 7.4 0 0 1-1.36-1.69c-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.17.04-.31-.02-.43-.06-.12-.55-1.32-.75-1.81-.2-.47-.4-.4-.55-.41h-.47c-.16 0-.43.06-.65.3-.22.25-.85.83-.85 2.03 0 1.2.87 2.36.99 2.52.12.16 1.72 2.62 4.16 3.67.58.25 1.04.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.65-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/></svg></span>
+              <a href="https://wa.me/212600000000" target="_blank" rel="noopener noreferrer" aria-label="Contacter IFPE Conseil sur WhatsApp">WhatsApp : +212 6 XX XX XX XX</a>
+            </div>
+            <div class="contact-info-row">
+              <span class="contact-info-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m4 7 8 6 8-6"/></svg></span>
+              <a href="mailto:contact@ifpeconseil.com">contact@ifpeconseil.com</a>
+            </div>
+            <div class="contact-info-row">
+              <span class="contact-info-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M3 12h18M12 3c2.3 2.5 3.5 5.5 3.5 9S14.3 18.5 12 21M12 3C9.7 5.5 8.5 8.5 8.5 12s1.2 6.5 3.5 9"/></svg></span>
+              <a href="index.html">www.ifpeconseil.com</a>
+            </div>
+            <div class="contact-info-row">
+              <span class="contact-info-icon"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 7v5l3 2"/></svg></span>
+              <span>Lundi – Vendredi : 9h00 – 18h00</span>
+            </div>
+          </div>
+        </aside>
 
-    <section id="formulaire" class="bg-silver px-4 py-20 lg:py-24">
-      <div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-5">
-        <div class="lg:col-span-3">
-          <div class="rounded-3xl bg-white p-6 shadow-card sm:p-8 lg:p-10">
-            <div class="mb-8">
-              <h2 class="text-2xl font-extrabold text-navy lg:text-3xl">Envoyer une demande</h2>
-              <p class="mt-3 text-sm leading-relaxed text-ink">PrÃ©sentez briÃ¨vement votre organisation et vos attentes. Nous reviendrons vers vous pour cadrer les prochaines Ã©tapes.</p>
+        <div class="contact-form-card">
+          <div>
+            <div class="mb-6">
+              <h2 class="contact-form-title">Envoyer une demande</h2>
+              <p class="mt-2 text-sm leading-relaxed text-ink">Merci de compléter le formulaire ci-dessous. Nous vous répondrons dans les meilleurs délais.</p>
             </div>
 
             <form id="contact-form" novalidate>
               <div class="grid gap-5 sm:grid-cols-2">
+                <fieldset class="contact-radio-group sm:col-span-2">
+                  <legend class="mb-3 block text-xs font-extrabold uppercase tracking-wide text-navy">Civilité *</legend>
+                  <div class="flex items-center gap-7">
+                    <label class="contact-radio-option text-sm font-semibold text-ink" for="civility-m">
+                      <input id="civility-m" class="contact-radio" name="civility" type="radio" value="M." required />
+                      <span>M.</span>
+                    </label>
+                    <label class="contact-radio-option text-sm font-semibold text-ink" for="civility-mme">
+                      <input id="civility-mme" class="contact-radio" name="civility" type="radio" value="Mme" required />
+                      <span>Mme</span>
+                    </label>
+                  </div>
+                </fieldset>
+
                 <div>
-                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="name">Nom complet *</label>
-                  <input id="name" name="name" type="text" required placeholder="Votre nom complet" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all" />
+                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="name">Nom *</label>
+                  <input id="name" name="name" type="text" required autocomplete="family-name" placeholder="Nom" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all" />
                 </div>
+                <div>
+                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="first-name">Prénom *</label>
+                  <input id="first-name" name="firstName" type="text" required autocomplete="given-name" placeholder="Prénom" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all" />
+                </div>
+
+                <div class="sm:col-span-2">
+                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="company">Société</label>
+                  <input id="company" name="company" type="text" autocomplete="organization" placeholder="Nom de votre société" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all" />
+                </div>
+
+                <div>
+                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="address">Adresse</label>
+                  <input id="address" name="address" type="text" autocomplete="street-address" placeholder="Adresse" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all" />
+                </div>
+                <div>
+                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="country">Pays</label>
+                  <select id="country" name="country" autocomplete="country-name" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink transition-all">
+                    <option value="Maroc" selected>Maroc</option>
+                    <option value="Algérie">Algérie</option>
+                    <option value="Tunisie">Tunisie</option>
+                    <option value="Mauritanie">Mauritanie</option>
+                    <option value="Sénégal">Sénégal</option>
+                    <option value="Côte d’Ivoire">Côte d’Ivoire</option>
+                    <option value="France">France</option>
+                    <option value="Belgique">Belgique</option>
+                    <option value="Autre">Autre</option>
+                  </select>
+                </div>
+
                 <div>
                   <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="email">Email *</label>
-                  <input id="email" name="email" type="email" required placeholder="votre@email.com" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all" />
+                  <input id="email" name="email" type="email" required autocomplete="email" placeholder="exemple@contact.ma" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all" />
                 </div>
                 <div>
-                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="phone">TÃ©lÃ©phone</label>
-                  <input id="phone" name="phone" type="tel" placeholder="+212 6 XX XX XX XX" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all" />
+                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="phone">Numéro de téléphone</label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+212 6 XX XX XX XX" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all" />
                 </div>
-                <div>
-                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="org">Organisation</label>
-                  <input id="org" name="org" type="text" placeholder="Votre organisation" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all" />
-                </div>
-              </div>
 
-              <div class="mt-5 grid gap-5 sm:grid-cols-2">
-                <div>
-                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="need">Type de besoin</label>
-                  <select id="need" name="need" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink transition-all">
-                    <option>Diagnostic organisationnel</option>
-                    <option>Optimisation des processus</option>
-                    <option>IngÃ©nierie de formation</option>
-                    <option>RÃ©fÃ©rentiels mÃ©tiers</option>
-                    <option>Digitalisation des processus</option>
-                    <option>Coaching des dirigeants</option>
-                    <option>Autre besoin</option>
-                  </select>
+                <div class="sm:col-span-2">
+                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="message">Message *</label>
+                  <textarea id="message" name="message" rows="6" required placeholder="Votre message" class="contact-input w-full resize-none rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all"></textarea>
                 </div>
-                <div>
-                  <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="timeline">Horizon du projet</label>
-                  <select id="timeline" name="timeline" class="contact-input w-full rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink transition-all">
-                    <option>Ã€ dÃ©finir</option>
-                    <option>ImmÃ©diat</option>
-                    <option>Dans le mois</option>
-                    <option>Dans le trimestre</option>
-                    <option>Projet Ã  moyen terme</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="mt-5">
-                <label class="mb-2 block text-xs font-extrabold uppercase tracking-wide text-navy" for="message">Message *</label>
-                <textarea id="message" name="message" rows="6" required placeholder="DÃ©crivez votre contexte, vos objectifs ou les difficultÃ©s Ã  traiter..." class="contact-input w-full resize-none rounded-xl border border-[#DDE6EF] bg-white px-4 py-3 text-sm text-ink placeholder-gray-400 transition-all"></textarea>
               </div>
 
               <button type="submit" class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-8 py-4 text-sm font-extrabold text-white transition-all hover:-translate-y-0.5 hover:bg-blue hover:shadow-lg">
@@ -496,13 +711,13 @@
                 Envoyer la demande
               </button>
               <div id="form-success" class="mt-4 hidden rounded-xl border border-green/30 bg-green/10 p-4 text-center text-sm font-bold text-green">
-                Votre demande a bien Ã©tÃ© prÃ©parÃ©e. Nous vous rÃ©pondrons rapidement.
+                Votre demande a bien été préparée. Nous vous répondrons rapidement.
               </div>
             </form>
           </div>
         </div>
 
-        <aside id="coordonnees" class="lg:col-span-2">
+        <aside id="coordonnees" hidden>
           <div class="rounded-3xl bg-navy p-8 text-white shadow-soft">
             <p class="text-2xl font-extrabold tracking-wide">IFPE <span class="text-blue">CONSEIL</span></p>
             <p class="mt-2 text-sm font-semibold text-white/78">IngÃ©nierie Â· Conseil Â· Formation Â· Performance</p>
@@ -551,7 +766,7 @@
       </div>
     </section>
 
-    <section class="px-4 py-20 lg:py-24">
+    <section hidden>
       <div class="mx-auto max-w-7xl">
         <div class="mb-12 max-w-3xl">
           <span class="mb-4 inline-flex rounded-full bg-green/15 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wider text-green">Votre demande</span>
@@ -592,9 +807,11 @@
     </section>
   </main>
 
+  <!-- ===== FOOTER ===== -->
   <footer style="background-color: var(--ifpe-dark-blue);">
     <div class="max-w-7xl mx-auto px-4 py-16">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- Col 1 – Brand -->
         <div class="lg:col-span-1">
           <div class="mb-4">
             <span class="text-2xl font-bold text-white tracking-wide">IFPE <span style="color:var(--ifpe-light-blue)">CONSEIL</span></span>
@@ -612,17 +829,19 @@
           </div>
         </div>
 
+        <!-- Col 2 – Liens rapides -->
         <div>
           <h4 class="text-sm font-bold text-white mb-5 uppercase tracking-wider">Liens rapides</h4>
           <ul class="space-y-3">
             <li><a href="index.html#qui" class="text-sm text-white/65 hover:text-white transition-colors">Qui sommes-nous ?</a></li>
             <li><a href="domaines.html" class="text-sm text-white/65 hover:text-white transition-colors">Domaines d'intervention</a></li>
             <li><a href="services.html" class="text-sm text-white/65 hover:text-white transition-colors">Nos services</a></li>
-            <li><a href="index.html#valeur" class="text-sm text-white/65 hover:text-white transition-colors">Notre valeur ajoutée</a></li>
+            <li><a href="valeur-ajoutee.html" class="text-sm text-white/65 hover:text-white transition-colors">Notre valeur ajoutée</a></li>
             <li><a href="contact.html" class="text-sm text-white/65 hover:text-white transition-colors">Contact</a></li>
           </ul>
         </div>
 
+        <!-- Col 3 – Domaines -->
         <div>
           <h4 class="text-sm font-bold text-white mb-5 uppercase tracking-wider">Nos domaines</h4>
           <ul class="space-y-3">
@@ -635,6 +854,7 @@
           </ul>
         </div>
 
+        <!-- Col 4 – Contact -->
         <div>
           <h4 class="text-sm font-bold text-white mb-5 uppercase tracking-wider">Contact</h4>
           <ul class="space-y-4">
@@ -654,6 +874,7 @@
         </div>
       </div>
 
+      <!-- Divider -->
       <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p class="text-xs text-white/45">© 2026 IFPE Conseil. Tous droits réservés.</p>
         <p class="text-xs text-white/45">Ingénierie · Conseil · Formation · Performance</p>
@@ -661,22 +882,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('contact-form');
-      const success = document.getElementById('form-success');
-
-      form.addEventListener('submit', event => {
-        event.preventDefault();
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-        success.classList.remove('hidden');
-        form.reset();
-      });
-    });
-  </script>
+  <script src="script.js" defer></script>
 </body>
 </html>

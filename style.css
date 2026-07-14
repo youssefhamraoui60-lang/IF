@@ -255,7 +255,7 @@ body.video-focus-active {
 #back-to-top {
   position: fixed;
   right: 24px;
-  bottom: 24px;
+  bottom: 100px;
   z-index: 1100;
   display: flex;
   width: 64px;
@@ -294,10 +294,45 @@ body.video-focus-active {
   outline-offset: 4px;
 }
 
+/* Bouton WhatsApp flottant partagé par toutes les pages. */
+#floating-whatsapp {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1100;
+  display: flex;
+  width: 64px;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  background: #25d366;
+  border-radius: 50%;
+  box-shadow: 0 12px 28px rgba(16, 138, 70, 0.3);
+  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+#floating-whatsapp:hover {
+  color: #ffffff;
+  background: #1fba59;
+  box-shadow: 0 15px 32px rgba(16, 138, 70, 0.38);
+  transform: translateY(-2px);
+}
+
+#floating-whatsapp svg {
+  width: 34px;
+  height: 34px;
+}
+
+#floating-whatsapp:focus-visible {
+  outline: 3px solid rgba(37, 211, 102, 0.35);
+  outline-offset: 4px;
+}
+
 @media (max-width: 639px) {
   #back-to-top {
     right: 16px;
-    bottom: 16px;
+    bottom: 80px;
     width: 52px;
     height: 52px;
   }
@@ -305,6 +340,18 @@ body.video-focus-active {
   #back-to-top svg {
     width: 26px;
     height: 26px;
+  }
+
+  #floating-whatsapp {
+    right: 16px;
+    bottom: 16px;
+    width: 52px;
+    height: 52px;
+  }
+
+  #floating-whatsapp svg {
+    width: 28px;
+    height: 28px;
   }
 }
 
@@ -417,6 +464,77 @@ body.video-focus-active {
   background: rgba(104, 183, 227, 0.22);
   box-shadow: 0 0 0 4px rgba(104, 183, 227, 0.14);
   transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ---- Recherche globale ---- */
+#search-bar {
+  width: min(100%, 48rem);
+}
+
+#search-bar > div,
+#search-bar > form {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+#search-bar input[type="search"] {
+  min-width: 0;
+  flex: 1 1 auto;
+  border: none !important;
+  outline: none !important;
+  background: transparent;
+  box-shadow: none !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#search-bar input[type="search"]:focus,
+#search-bar input[type="search"]:focus-visible,
+#search-bar input[type="search"]:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#search-bar input[type="search"]::-webkit-search-decoration,
+#search-bar input[type="search"]::-webkit-search-cancel-button,
+#search-bar input[type="search"]::-webkit-search-results-button,
+#search-bar input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+  -webkit-appearance: none;
+}
+
+#search-bar > div > svg,
+#search-bar > form > svg,
+#search-close {
+  flex: 0 0 auto;
+}
+
+#search-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  outline: 0;
+  background: transparent;
+}
+
+@media (max-width: 639px) {
+  #search-bar {
+    margin-top: .5rem !important;
+    padding-inline: .25rem !important;
+  }
+
+  #search-bar > div,
+  #search-bar > form {
+    gap: .6rem !important;
+    padding: .8rem .9rem !important;
+  }
+
+  #search-bar input[type="search"] {
+    font-size: 1rem;
+  }
 }
 
 /* ---- Hero animation ---- */
@@ -1013,14 +1131,6 @@ footer a {
   padding: 0.85rem 0.7rem;
   border-radius: 1.2rem;
   border: 1px solid transparent;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
-}
-
-.cta-stat-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(255, 255, 255, 0.28);
-  background: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 14px 26px rgba(0, 12, 32, 0.18);
 }
 
 .cta-stat-badge {
@@ -1034,13 +1144,6 @@ footer a {
   background: rgba(10, 70, 130, 0.34);
   border: 1px solid rgba(255, 255, 255, 0.24);
   box-shadow: 0 10px 24px rgba(0, 12, 32, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
-}
-
-.cta-stat-card:hover .cta-stat-badge {
-  transform: translateY(-3px);
-  border-color: rgba(255, 255, 255, 0.42);
-  box-shadow: 0 14px 30px rgba(0, 12, 32, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.16);
 }
 
 .cta-stat-number {
@@ -1105,5 +1208,221 @@ footer a {
   .cta-stat-badge {
     width: 104px;
     height: 104px;
+  }
+}
+
+/* Protection des images contre la sélection et le glisser-déposer natif. */
+.protected-image {
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+}
+
+img {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Palette partagée du header et du footer, identique à index.html. */
+#site-header {
+  --ifpe-dark-blue: #00417F;
+  --ifpe-medium-blue: #2F7FB5;
+  --ifpe-light-blue: #68B7E3;
+  --ifpe-surface: #F3F9FD;
+  --ifpe-gray: #6F7378;
+}
+
+#site-header .text-navy { color: #00417F !important; }
+#site-header .text-navy\/90 { color: rgb(0 65 127 / .9) !important; }
+#site-header .text-blue { color: #2F7FB5 !important; }
+#site-header .text-green { color: #68B7E3 !important; }
+#site-header .text-ink { color: #6F7378 !important; }
+#site-header .bg-navy { background-color: #00417F !important; }
+#site-header .bg-navy\/10 { background-color: rgb(0 65 127 / .1) !important; }
+#site-header .bg-blue { background-color: #2F7FB5 !important; }
+#site-header .bg-blue\/10 { background-color: rgb(47 127 181 / .1) !important; }
+#site-header .bg-green { background-color: #68B7E3 !important; }
+#site-header .bg-green\/10 { background-color: rgb(104 183 227 / .1) !important; }
+#site-header .bg-green\/15 { background-color: rgb(104 183 227 / .15) !important; }
+#site-header .bg-silver { background-color: #F3F9FD !important; }
+#site-header .border-silver { border-color: #D8E8F3 !important; }
+
+#site-header .hover\:text-blue:hover { color: #2F7FB5 !important; }
+#site-header .hover\:text-navy:hover,
+#site-header .group:hover .group-hover\:text-navy { color: #00417F !important; }
+#site-header .hover\:bg-blue:hover { background-color: #2F7FB5 !important; }
+#site-header .hover\:bg-blue\/5:hover { background-color: rgb(47 127 181 / .05) !important; }
+#site-header .hover\:bg-silver:hover { background-color: #F3F9FD !important; }
+#site-header .hover\:border-blue:hover { border-color: #2F7FB5 !important; }
+#site-header .hover\:border-blue\/30:hover { border-color: rgb(47 127 181 / .3) !important; }
+#site-header .group:hover .group-hover\:bg-blue\/15 { background-color: rgb(47 127 181 / .15) !important; }
+#site-header .group:hover .group-hover\:bg-blue\/20 { background-color: rgb(47 127 181 / .2) !important; }
+#site-header .group:hover .group-hover\:bg-green\/25 { background-color: rgb(104 183 227 / .25) !important; }
+#site-header .shadow-navy\/5 { --tw-shadow-color: rgb(0 65 127 / .05) !important; }
+#site-header .shadow-navy\/15 { --tw-shadow-color: rgb(0 65 127 / .15) !important; }
+#site-header .shadow-navy\/20 { --tw-shadow-color: rgb(0 65 127 / .2) !important; }
+#site-header .hover\:shadow-blue\/25:hover { --tw-shadow-color: rgb(47 127 181 / .25) !important; }
+
+/* Le texte d'un domaine actif reste lisible sur son fond bleu. */
+#site-header .domain-menu-list a.is-active,
+#site-header .domain-menu-list a.is-active span {
+  color: #ffffff !important;
+}
+
+#site-header .domain-menu-list a.is-active > span:first-child {
+  background-color: #ffffff !important;
+}
+
+/* Bouton principal du méga-menu Valeur ajoutée, identique sur toutes les pages. */
+#site-header .value-menu-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.4rem;
+  padding: 0.8rem 1.15rem;
+  border-radius: 0.8rem;
+  color: #ffffff !important;
+  background: #00417f;
+  box-shadow: 0 8px 18px rgba(0, 65, 127, 0.16);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+#site-header .value-menu-button:hover {
+  color: #ffffff !important;
+  background: #2f7fb5;
+  transform: translateY(-1px);
+}
+
+/* Boutons simples bleu ciel du méga-menu À propos, sans icônes. */
+#site-header .about-menu-actions > a {
+  min-height: 3.35rem;
+  justify-content: center;
+  padding: 0.9rem 1rem;
+  border-color: rgba(47, 127, 181, 0.2) !important;
+  color: #00417f !important;
+  background: rgba(104, 183, 227, 0.24) !important;
+  text-align: center;
+}
+
+#site-header .about-menu-actions > a:hover {
+  border-color: #68b7e3 !important;
+  color: #00417f !important;
+  background: #68b7e3 !important;
+}
+
+#site-header .about-menu-actions > a > span {
+  color: inherit !important;
+  font-weight: 700;
+}
+
+footer[style*="--ifpe-dark-blue"] {
+  --ifpe-dark-blue: #00417F;
+  --ifpe-medium-blue: #2F7FB5;
+  --ifpe-light-blue: #68B7E3;
+  background-color: #00417F !important;
+}
+
+footer[style*="--ifpe-dark-blue"] .text-green {
+  color: #68B7E3 !important;
+}
+
+/* Fil d'Ariane partagé par toutes les pages. */
+.site-breadcrumb {
+  position: relative;
+  z-index: 60;
+  width: 100%;
+  margin-bottom: -7rem;
+  padding: 7.15rem 1rem 0.7rem;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  color: #6f7378;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.site-breadcrumb__inner {
+  display: flex;
+  width: min(100%, 92rem);
+  margin-inline: auto;
+  align-items: center;
+  gap: 0.45rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.site-breadcrumb__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.site-breadcrumb__link,
+.site-breadcrumb__current {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.42rem;
+  min-width: 0;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.site-breadcrumb__link {
+  color: #2f7fb5;
+  transition: color 0.2s ease;
+}
+
+.site-breadcrumb__link:hover {
+  color: #00417f;
+}
+
+.site-breadcrumb__current {
+  color: #00417f;
+  font-weight: 800;
+}
+
+.site-breadcrumb__home {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+}
+
+.site-breadcrumb__chevron {
+  width: 0.9rem;
+  height: 0.9rem;
+  flex: 0 0 auto;
+  color: #9aafbf;
+}
+
+/* L'ancien fil interne de la fiche domaine est remplacé par le composant global. */
+.domain-detail-page .domain-breadcrumb {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .site-breadcrumb {
+    margin-bottom: -6.45rem;
+    padding: 6.6rem 0.85rem 0.6rem;
+  }
+
+  .site-breadcrumb__inner {
+    gap: 0.32rem;
+  }
+
+  .site-breadcrumb__link,
+  .site-breadcrumb__current {
+    gap: 0.32rem;
+    font-size: 0.72rem;
+  }
+
+  .site-breadcrumb__home,
+  .site-breadcrumb__chevron {
+    width: 0.82rem;
+    height: 0.82rem;
   }
 }

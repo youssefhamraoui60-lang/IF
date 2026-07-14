@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (domainMenuVisual) {
       domainMenuVisual.innerHTML = `
         <div id="domain-menu-preview" class="domain-menu-preview relative h-[330px] w-full overflow-hidden rounded-2xl bg-navy">
-          <img id="domain-menu-preview-image" src="assets/images/menu-domain-organisation.jpg" alt="Développement organisationnel" class="h-full w-full object-cover" />
+          <img id="domain-menu-preview-image" src="assets/images/menu-domain-organisation.jpg" alt="Développement organisationnel" class="protected-image h-full w-full object-cover" draggable="false" />
           <div class="absolute inset-0 bg-gradient-to-t from-[#173A63]/95 via-[#173A63]/45 to-transparent"></div>
           <div class="absolute inset-x-0 bottom-0 p-6 text-white">
             <p class="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">IFPE Conseil</p>
@@ -39,6 +39,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* ---------- Simplification des méga-menus partagés ---------- */
+  const aboutMenu = document.getElementById('menu-qui');
+  if (aboutMenu) {
+    const aboutColumns = aboutMenu.querySelectorAll(':scope > .grid > div');
+    const aboutIntro = aboutColumns[0];
+    const aboutActions = aboutColumns[1];
+
+    const aboutBadge = aboutIntro?.querySelector(':scope > span:first-child');
+    aboutBadge?.remove();
+
+    if (aboutActions) {
+      aboutActions.classList.add('about-menu-actions');
+      aboutActions.querySelectorAll(':scope > a').forEach(link => {
+        const icon = link.querySelector(':scope > span:first-child');
+        if (icon?.querySelector('svg')) icon.remove();
+      });
+    }
+  }
+
+  document.querySelectorAll('#menu-valeur a[href="valeur-ajoutee.html"]').forEach(link => {
+    link.classList.add('value-menu-button');
+  });
+
+  /* Retrait des petits libellés décoratifs des méga-menus. */
+  [
+    '#menu-domaines > .grid > div:first-child > span:first-child',
+    '#menu-services > div > div:first-child > span:first-child',
+    '#menu-valeur > .grid > div:first-child > span:first-child'
+  ].forEach(selector => document.querySelector(selector)?.remove());
+
   let backToTop = document.getElementById('back-to-top');
 
   if (!backToTop) {
@@ -51,6 +81,22 @@ document.addEventListener('DOMContentLoaded', () => {
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="m5 12 7-7 7 7M12 5v14" />
       </svg>`;
     document.body.appendChild(backToTop);
+  }
+
+  let whatsappButton = document.getElementById('floating-whatsapp');
+
+  if (!whatsappButton) {
+    whatsappButton = document.createElement('a');
+    whatsappButton.id = 'floating-whatsapp';
+    whatsappButton.href = 'https://wa.me/212600000000';
+    whatsappButton.target = '_blank';
+    whatsappButton.rel = 'noopener noreferrer';
+    whatsappButton.setAttribute('aria-label', 'Contacter IFPE Conseil sur WhatsApp');
+    whatsappButton.innerHTML = `
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12.04 2a9.82 9.82 0 0 0-8.5 14.74L2 22l5.4-1.42A9.99 9.99 0 0 0 12.04 22 9.96 9.96 0 0 0 12.04 2Zm0 18.18a8.14 8.14 0 0 1-4.14-1.13l-.3-.18-3.2.84.86-3.11-.2-.32a8 8 0 1 1 6.98 3.9Zm4.47-6.08c-.25-.12-1.45-.71-1.67-.8-.23-.08-.39-.12-.55.13-.16.24-.63.8-.77.96-.14.16-.28.18-.52.06-.25-.12-1.03-.38-1.97-1.22a7.4 7.4 0 0 1-1.36-1.69c-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.17.04-.31-.02-.43-.06-.12-.55-1.32-.75-1.81-.2-.47-.4-.4-.55-.41h-.47c-.16 0-.43.06-.65.3-.22.25-.85.83-.85 2.03 0 1.2.87 2.36.99 2.52.12.16 1.72 2.62 4.16 3.67.58.25 1.04.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.45-.6 1.65-1.17.2-.58.2-1.07.14-1.17-.06-.1-.22-.16-.47-.28Z"/>
+      </svg>`;
+    document.body.appendChild(whatsappButton);
   }
 
   /* ---------- Header scroll effect ---------- */
@@ -572,30 +618,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchClose  = document.getElementById('search-close');
   const searchForms  = document.querySelectorAll('.site-search');
 
-  function normalizeText(value) {
-    return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  }
-
   function runSearch(query) {
-    const term = normalizeText(query.trim());
-    document.querySelectorAll('.search-hit').forEach(el => el.classList.remove('search-hit'));
+    const term = query.trim();
     if (!term) return;
-
-    const candidates = Array.from(document.querySelectorAll('main h1, main h2, main h3, main h4, main p, main li'))
-      .filter(el => el.offsetParent !== null && normalizeText(el.textContent).includes(term));
-
-    if (!candidates.length) {
-      alert((document.documentElement.lang === 'en' && translations.en['Aucun résultat trouvé.']) || 'Aucun résultat trouvé.');
-      return;
-    }
-
-    const target = candidates[0];
-    target.classList.add('search-hit');
-    window.scrollTo({
-      top: target.getBoundingClientRect().top + window.scrollY - 135,
-      behavior: 'smooth'
-    });
-    setTimeout(() => target.classList.remove('search-hit'), 2600);
+    window.location.href = `recherche.html?q=${encodeURIComponent(term)}`;
   }
 
   searchForms.forEach(form => {
@@ -623,7 +649,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (searchBar) {
     const searchBarInput = searchBar.querySelector('input');
     searchBarInput.addEventListener('keydown', e => {
-      if (e.key === 'Enter') runSearch(searchBarInput.value);
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        runSearch(searchBarInput.value);
+      }
     });
   }
 
@@ -694,31 +723,47 @@ document.addEventListener('DOMContentLoaded', () => {
   if (form) {
     form.addEventListener('submit', e => {
       e.preventDefault();
-      const name    = form.name.value.trim();
-      const email   = form.email.value.trim();
-      const message = form.message.value.trim();
+      const requiredFields = [...form.querySelectorAll('[required]')];
+      const civilityGroup = form.querySelector('.contact-radio-group');
+      const civilitySelected = Boolean(form.querySelector('input[name="civility"]:checked'));
 
-      if (!name || !email || !message) {
-        form.querySelectorAll('[required]').forEach(el => {
-          if (!el.value.trim()) {
-            el.style.borderColor = '#ef4444';
-            el.addEventListener('input', () => { el.style.borderColor = ''; }, { once: true });
-          }
-        });
+      requiredFields.forEach(field => {
+        if (field.type !== 'radio') {
+          field.style.borderColor = field.checkValidity() ? '' : '#ef4444';
+        }
+      });
+      civilityGroup?.classList.toggle('is-invalid', !civilitySelected);
+
+      if (!form.checkValidity() || !civilitySelected) {
+        form.reportValidity();
         return;
       }
 
       const btn = form.querySelector('button[type="submit"]');
+      const originalButtonContent = btn.innerHTML;
       btn.disabled = true;
       btn.innerHTML = '<svg class="w-4 h-4 animate-spin inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/></svg> Envoi en cours...';
 
       setTimeout(() => {
         form.reset();
+        requiredFields.forEach(field => { field.style.borderColor = ''; });
+        civilityGroup?.classList.remove('is-invalid');
         btn.disabled = false;
-        btn.innerHTML = '<svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Envoyer le message';
+        btn.innerHTML = originalButtonContent;
         success.classList.remove('hidden');
         setTimeout(() => success.classList.add('hidden'), 5000);
       }, 1200);
+    });
+
+    form.querySelectorAll('[required]').forEach(field => {
+      const eventName = field.type === 'radio' ? 'change' : 'input';
+      field.addEventListener(eventName, () => {
+        if (field.type === 'radio') {
+          form.querySelector('.contact-radio-group')?.classList.remove('is-invalid');
+        } else if (field.checkValidity()) {
+          field.style.borderColor = '';
+        }
+      });
     });
   }
 
@@ -786,7 +831,7 @@ document.addEventListener('DOMContentLoaded', () => {
     panel.innerHTML = `
       <div>
         <div class="domain-accordion-content">
-          <img class="domain-icon" src="${images[index]}" alt="" loading="lazy" />
+          <img class="protected-image domain-icon" src="${images[index]}" alt="" loading="lazy" draggable="false" />
           <p>${descriptions[index]}</p>
         </div>
       </div>`;
@@ -824,3 +869,136 @@ document.addEventListener('DOMContentLoaded', () => {
   // Tous les domaines restent fermés au chargement afin que la section
   // complète tienne dans un seul écran, comme sur la référence.
 })();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const images = document.querySelectorAll("img");
+
+  images.forEach(function (image) {
+    image.setAttribute("draggable", "false");
+    image.classList.add("protected-image");
+  });
+
+  document.addEventListener("dragstart", function (event) {
+    if (event.target instanceof HTMLImageElement) {
+      event.preventDefault();
+    }
+  });
+
+  document.addEventListener("contextmenu", function (event) {
+    if (event.target instanceof HTMLImageElement) {
+      event.preventDefault();
+    }
+  });
+});
+
+/* ---------- Fil d'Ariane global ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  const main = Array.from(document.querySelectorAll('main')).find(element => {
+    return element.getAttribute('aria-hidden') !== 'true' && getComputedStyle(element).display !== 'none';
+  });
+
+  if (!main || document.querySelector('.site-breadcrumb')) return;
+
+  const pageName = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const domainLabels = {
+    organisation: 'Développement organisationnel',
+    rh: 'Gestion stratégique des ressources humaines',
+    formation: 'Formation professionnelle et développement des compétences',
+    referentiels: 'Études, ingénierie et référentiels',
+    digital: 'Digitalisation et transformation numérique',
+    strategie: 'Planification stratégique et accompagnement du changement',
+    coaching: 'Coaching professionnel et mobilisation des équipes'
+  };
+
+  const pageTrails = {
+    'index.html': [{ label: 'Accueil' }],
+    'contact.html': [
+      { label: 'Accueil', href: 'index.html' },
+      { label: 'Nous contacter' }
+    ],
+    'domaines.html': [
+      { label: 'Accueil', href: 'index.html' },
+      { label: 'Nos domaines' }
+    ],
+    'services.html': [
+      { label: 'Accueil', href: 'index.html' },
+      { label: 'Nos services' }
+    ],
+    'valeur-ajoutee.html': [
+      { label: 'Accueil', href: 'index.html' },
+      { label: 'Notre valeur ajoutée' }
+    ],
+    'recherche.html': [
+      { label: 'Accueil', href: 'index.html' },
+      { label: 'Recherche' }
+    ]
+  };
+
+  const getDomainTrail = () => {
+    const key = new URLSearchParams(window.location.search).get('d');
+    return [
+      { label: 'Accueil', href: 'index.html' },
+      { label: 'Nos domaines', href: 'domaines.html' },
+      { label: domainLabels[key] || domainLabels.organisation }
+    ];
+  };
+
+  const breadcrumb = document.createElement('nav');
+  breadcrumb.className = 'site-breadcrumb';
+  breadcrumb.setAttribute('aria-label', 'Fil d’Ariane');
+  breadcrumb.innerHTML = '<div class="site-breadcrumb__inner"></div>';
+  main.before(breadcrumb);
+  document.body.classList.add('has-site-breadcrumb');
+
+  const homeIcon = `
+    <svg class="site-breadcrumb__home" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M3 10.8 12 3l9 7.8M5.5 9.5V21h13V9.5M9.5 21v-6.5h5V21" />
+    </svg>`;
+  const chevron = `
+    <svg class="site-breadcrumb__chevron" aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m7.5 4.5 5 5.5-5 5.5" />
+    </svg>`;
+
+  const renderBreadcrumb = () => {
+    const items = pageName === 'domaine-detail.html'
+      ? getDomainTrail()
+      : (pageTrails[pageName] || [{ label: document.title.split(/[|–-]/)[0].trim() || 'Page' }]);
+    const inner = breadcrumb.querySelector('.site-breadcrumb__inner');
+    inner.replaceChildren();
+
+    items.forEach((item, index) => {
+      if (index > 0) inner.insertAdjacentHTML('beforeend', chevron);
+
+      const isCurrent = index === items.length - 1;
+      const element = item.href && !isCurrent
+        ? document.createElement('a')
+        : document.createElement('span');
+
+      if (item.href && !isCurrent) element.href = item.href;
+      element.className = isCurrent
+        ? 'site-breadcrumb__current'
+        : 'site-breadcrumb__link';
+      if (isCurrent) element.setAttribute('aria-current', 'page');
+      if (index === 0) element.insertAdjacentHTML('afterbegin', homeIcon);
+
+      const label = document.createElement('span');
+      label.textContent = item.label;
+      element.appendChild(label);
+      inner.appendChild(element);
+    });
+  };
+
+  renderBreadcrumb();
+
+  if (pageName === 'domaine-detail.html') {
+    window.addEventListener('popstate', renderBreadcrumb);
+    const detailTitle = document.getElementById('detail-title');
+    if (detailTitle) {
+      new MutationObserver(renderBreadcrumb).observe(detailTitle, {
+        childList: true,
+        characterData: true,
+        subtree: true
+      });
+    }
+  }
+});

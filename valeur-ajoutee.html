@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Services - IFPE Conseil</title>
-  <meta name="description" content="Découvrez les services d'IFPE Conseil : diagnostic organisationnel, optimisation des processus, ingénierie de formation, référentiels métiers, digitalisation et coaching des dirigeants." />
-
+  <title>Notre valeur ajoutée | IFPE Conseil</title>
+  <meta name="description" content="Découvrez la valeur ajoutée d’IFPE Conseil : expertise éprouvée, approche intégrée et solutions sur mesure." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -16,234 +15,284 @@
             blue: '#2F6FA3',
             green: '#6BAA3A',
             silver: '#F5F7FA',
-            ink: '#44546A',
+            ink: '#44546A'
           },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          },
-          boxShadow: {
-            soft: '0 18px 45px rgba(30, 58, 95, 0.12)',
-            card: '0 12px 28px rgba(30, 58, 95, 0.08)',
-          },
-        },
-      },
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+        }
+      }
     };
   </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-
   <style>
-    :root {
-      --ifpe-dark-blue: #1E3A5F;
-      --ifpe-medium-blue: #2F6FA3;
-      --ifpe-green: #6BAA3A;
-      --ifpe-surface: #F5F7FA;
-      --ifpe-border: #DDE6EF;
-    }
-
-    .services-hero {
-      min-height: clamp(34rem, 43vw, 41rem);
-      background-color: #174f8f;
-      background-image: url("assets/images/services-hero-bg.png");
-      background-position: center bottom;
-      background-repeat: no-repeat;
-      background-size: cover;
-      isolation: isolate;
-    }
-
-    .services-hero-content {
-      transform: translateY(-1.25rem);
-    }
-
-    .services-hero::after {
-      display: none;
-    }
-
-    @media (max-width: 639px) {
-      .services-hero {
-        min-height: 38rem;
-        background-position: 58% bottom;
-      }
-
-      .services-hero-content {
-        transform: translateY(-.5rem);
-      }
-    }
-
-    .services-mission {
-      padding: clamp(4rem, 7vw, 6.5rem) 1.25rem;
-      background: #FFFFFF;
-    }
-
-    .services-mission-inner {
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; color: #475569; background: #fff; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    .container { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
+    .value-split {
       display: grid;
-      grid-template-columns: minmax(0, .95fr) minmax(0, 1.15fr);
-      gap: clamp(2.5rem, 6vw, 5.5rem);
-      align-items: center;
-      width: min(100%, 80rem);
-      margin-inline: auto;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      width: 100%;
+      min-height: 100svh;
+      overflow: hidden;
+      background: #fff;
     }
-
-    .services-mission-title {
+    .value-split__content {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: clamp(9.5rem, 16vh, 11.5rem) clamp(2.5rem, 5.25vw, 6.5rem) clamp(3.5rem, 7vh, 5.5rem);
+      color: #44546A;
+      background: #fff;
+    }
+    .value-split__inner {
+      width: min(100%, 42rem);
+      margin: 0;
+    }
+    .value-split__eyebrow {
+      display: block;
+      margin: 0 0 1.15rem;
+      color: #2F6FA3;
+      font-size: clamp(.7rem, .75vw, .82rem);
+      font-weight: 800;
+      line-height: 1.4;
+      letter-spacing: .14em;
+      text-align: left;
+    }
+    .value-split__title {
+      max-width: 10ch;
+      margin: 0;
       color: #1E3A5F;
-      font-size: clamp(2rem, 3.4vw, 3rem);
+      font-size: clamp(2.8rem, 4.2vw, 4.35rem);
+      font-weight: 800;
+      line-height: .98;
+      letter-spacing: -.045em;
+      text-align: left;
+    }
+    .value-split__intro {
+      max-width: 36rem;
+      margin: 1.4rem 0 0;
+      color: #44546A;
+      font-size: clamp(.94rem, 1vw, 1.04rem);
+      line-height: 1.7;
+      text-align: left;
+    }
+    .value-split__subtitle {
+      margin: clamp(2.35rem, 4.6vh, 3.5rem) 0 0;
+      color: #1E3A5F;
+      font-size: clamp(1.65rem, 2.1vw, 2.15rem);
       font-weight: 800;
       line-height: 1.1;
-      letter-spacing: -.03em;
+      letter-spacing: -.025em;
+      text-align: left;
     }
-
-    .services-mission-rule {
-      width: 4rem;
-      height: .3rem;
-      margin: 1.25rem 0 1.75rem;
-      border-radius: 999px;
-      background: #4FA3D1;
-    }
-
-    .services-mission-text {
-      color: #44546A;
-      font-size: clamp(1rem, 1.4vw, 1.1rem);
-      line-height: 1.85;
-    }
-
-    .services-mission-image-wrap {
-      overflow: hidden;
-      aspect-ratio: 16 / 10;
-      border-radius: 1rem;
-      background: #E9F1F7;
-    }
-
-    .services-mission-image {
+    .value-split__rule {
       display: block;
+      width: 3.5rem;
+      height: .22rem;
+      margin-top: .75rem;
+      border-radius: 999px;
+      background: #6EA6D7;
+    }
+    .value-split__difference {
+      max-width: 38rem;
+      margin: 1rem 0 0;
+      color: #44546A;
+      font-size: clamp(.92rem, 1vw, 1.04rem);
+      line-height: 1.72;
+      text-align: left;
+    }
+    .value-split__pillars {
+      display: grid;
+      gap: clamp(1.25rem, 2.4vh, 1.85rem);
+      margin-top: clamp(1.6rem, 3vh, 2.2rem);
+    }
+    .value-split__pillar {
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+    .value-split__pillar h3 {
+      margin: 0;
+      color: #1E3A5F;
+      font-size: clamp(1.03rem, 1.18vw, 1.25rem);
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .value-split__pillar p {
+      max-width: 38rem;
+      margin: .35rem 0 0;
+      color: #44546A;
+      font-size: clamp(.87rem, .94vw, .98rem);
+      line-height: 1.62;
+    }
+    .value-split__visual {
+      position: relative;
+      min-width: 0;
+      min-height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #1E3A5F;
+    }
+    .value-split__visual::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      pointer-events: none;
+      background: rgba(30, 58, 95, .08);
+    }
+    .value-split__image {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
+      max-width: none;
       object-fit: cover;
       object-position: center;
     }
-
-    @media (max-width: 767px) {
-      .services-mission-inner {
-        grid-template-columns: 1fr;
-        gap: 2.25rem;
-      }
-
-      .services-mission-image-wrap {
-        aspect-ratio: 4 / 3;
-      }
-    }
-
-    .service-detail-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
-      gap: clamp(3rem, 7vw, 6rem);
+    .contact-cta {
+      display: flex;
+      min-height: 250px;
+      margin-block: clamp(2.5rem, 4.5vw, 4rem);
       align-items: center;
-      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
-      border-top: 1px solid #E2E8F0;
+      padding: clamp(2.25rem, 4vw, 3.5rem) clamp(2rem, 5vw, 4.5rem);
+      color: #fff;
+      background-image:
+        linear-gradient(rgba(15, 38, 64, .55), rgba(15, 38, 64, .55)),
+        url("assets/images/cta-contact-reunion-formation.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
-
-    .service-detail-row:first-child {
-      padding-top: 1rem;
-      border-top: 0;
-    }
-
-    .service-detail-row:nth-child(even) .service-detail-gallery {
-      order: -1;
-    }
-
-    .service-detail-copy {
-      display: grid;
-      gap: 2.75rem;
-    }
-
-    .service-detail-heading {
+    .contact-cta__inner {
       display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      color: #2F6FA3;
-      font-size: clamp(1.45rem, 2.5vw, 2.15rem);
-      font-weight: 800;
-      line-height: 1.22;
-      letter-spacing: -.025em;
+      width: min(100%, 80rem);
+      margin-inline: auto;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(2rem, 6vw, 6rem);
     }
-
-    .service-detail-heading::before {
-      content: '';
-      flex: 0 0 auto;
-      width: 2.8rem;
-      height: .48rem;
-      margin-top: .65rem;
-      border-radius: 999px;
-      background: #4FA3D1;
+    .contact-cta__content {
+      max-width: 43rem;
+      text-align: left;
     }
-
-    .service-detail-item p {
-      margin-top: 1.15rem;
-      color: #334155;
-      font-size: 1rem;
-      line-height: 1.78;
-    }
-
-    .service-detail-list {
-      display: grid;
-      gap: .7rem;
-      margin-top: 1.2rem;
-    }
-
-    .service-detail-list li {
-      display: flex;
-      gap: .85rem;
-      color: #334155;
-      font-size: .95rem;
-      line-height: 1.55;
-    }
-
-    .service-detail-list li::before {
-      content: '';
-      flex: 0 0 auto;
-      width: 1rem;
-      height: .28rem;
-      margin-top: .58rem;
-      border-radius: 999px;
-      background: #4FA3D1;
-    }
-
-    .service-detail-gallery img {
+    .contact-cta__eyebrow {
       display: block;
-      width: 86%;
-      aspect-ratio: 4 / 3;
-      border-radius: .9rem;
-      object-fit: cover;
+      margin: 0 0 .8rem;
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
     }
-
-    .service-detail-gallery img:last-child {
-      width: 72%;
-      margin: -4.5rem 0 0 auto;
-      border: .5rem solid #FFFFFF;
-      box-shadow: 0 18px 42px rgba(30, 58, 95, .18);
+    .contact-cta h2 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(2rem, 3vw, 3rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.035em;
     }
-
-    @media (max-width: 899px) {
-      .service-detail-row {
-        grid-template-columns: 1fr;
-        gap: 2.75rem;
+    .contact-cta p {
+      max-width: 40rem;
+      margin: 1.1rem 0 0;
+      color: rgba(255, 255, 255, .9);
+      font-size: clamp(.95rem, 1.25vw, 1.08rem);
+      line-height: 1.7;
+    }
+    .contact-cta__button {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      min-height: 3.4rem;
+      padding: .95rem 1.6rem;
+      color: #1E3A5F;
+      border-radius: 1rem;
+      background: #fff;
+      box-shadow: 0 12px 28px rgba(15, 38, 64, .18);
+      font-size: .92rem;
+      font-weight: 800;
+      white-space: nowrap;
+      transition: transform .22s ease, background-color .22s ease, box-shadow .22s ease;
+    }
+    .contact-cta__button:hover {
+      color: #1E3A5F;
+      background: #f3f9fd;
+      box-shadow: 0 16px 34px rgba(15, 38, 64, .25);
+      transform: translateY(-2px);
+    }
+    @media (max-width: 1099px) {
+      .value-split {
+        grid-template-columns: minmax(0, 1fr);
       }
-
-      .service-detail-row:nth-child(even) .service-detail-gallery {
-        order: 0;
+      .value-split__content {
+        justify-content: flex-start;
+        padding: 9.5rem clamp(2rem, 7vw, 5rem) 4.5rem;
+      }
+      .value-split__inner {
+        width: min(100%, 46rem);
+      }
+      .value-split__title {
+        font-size: clamp(2.8rem, 7vw, 4.2rem);
+      }
+      .value-split__visual {
+        min-height: clamp(42rem, 110vw, 60rem);
+      }
+      .value-split__image {
+        position: absolute;
+      }
+      .contact-cta {
+        min-height: 230px;
+        background-position: 58% center;
+      }
+      .contact-cta__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.6rem;
       }
     }
-
-    #intro,
-    #expertises,
-    #contact {
-      scroll-margin-top: 9rem;
+    @media (max-width: 639px) {
+      .container { width: min(100% - 28px,1180px); }
+      .value-split__content {
+        padding: 8.5rem 1.4rem 3.5rem;
+      }
+      .value-split__eyebrow {
+        font-size: .66rem;
+        letter-spacing: .1em;
+      }
+      .value-split__title {
+        font-size: clamp(2.45rem, 11.5vw, 3.35rem);
+      }
+      .value-split__subtitle {
+        margin-top: 2.5rem;
+        font-size: clamp(1.55rem, 7vw, 1.95rem);
+      }
+      .value-split__visual {
+        min-height: clamp(30rem, 145vw, 42rem);
+      }
+      .contact-cta {
+        min-height: 0;
+        margin-block: 2rem;
+        padding: 2.35rem 1.35rem;
+        background-position: 62% center;
+      }
+      .contact-cta h2 {
+        font-size: clamp(1.9rem, 9vw, 2.5rem);
+      }
+      .contact-cta__button {
+        width: 100%;
+        white-space: normal;
+      }
     }
   </style>
 </head>
-
 <body class="font-sans text-ink bg-white antialiased">
 
   <!-- ===== HEADER ===== -->
@@ -556,150 +605,57 @@
   </div>
   <div id="mobile-overlay" class="fixed inset-0 z-[990] bg-navy/40 backdrop-blur-sm hidden lg:hidden"></div>
 
-  <!-- ===== MAIN CONTENT ===== -->
+
   <main>
-    <section class="services-hero relative flex items-center overflow-hidden px-4 pb-24 pt-40 text-white">
-      <div class="services-hero-content mx-auto flex w-full max-w-5xl flex-col items-center text-center">
-        <h1 class="text-4xl font-extrabold leading-tight tracking-[-0.025em] sm:text-5xl lg:text-6xl">Nos services</h1>
-        <p class="mt-6 max-w-3xl text-base leading-relaxed text-white sm:text-lg lg:text-xl">
-          Des solutions sur mesure pour accompagner vos projets de performance, de transformation et de développement durable.
-        </p>
-        <div class="mt-9 flex w-full max-w-4xl flex-col justify-center gap-4 sm:flex-row">
-          <a href="contact.html" class="inline-flex h-14 flex-1 items-center justify-center rounded-xl bg-white px-6 text-sm font-extrabold text-navy shadow-lg shadow-black/10 transition-all hover:-translate-y-0.5 hover:bg-silver">
-            Demander un accompagnement
-          </a>
-          <a href="#expertises" class="inline-flex h-14 flex-1 items-center justify-center rounded-xl border-2 border-white/65 bg-transparent px-6 text-sm font-extrabold text-white transition-all hover:-translate-y-0.5 hover:bg-white hover:text-navy">
-            Découvrir nos expertises
-          </a>
+    <section class="value-split" aria-labelledby="value-page-title">
+      <div class="value-split__content">
+        <div class="value-split__inner">
+          <p class="value-split__eyebrow">CONSEIL | EXPERTISE | PERFORMANCE</p>
+          <h1 id="value-page-title" class="value-split__title">Notre valeur ajoutée</h1>
+          <p class="value-split__intro">Trois piliers fondamentaux qui font d’IFPE Conseil un partenaire de confiance pour votre performance durable.</p>
+
+          <h2 id="notre-difference" class="value-split__subtitle">Notre différence</h2>
+          <span class="value-split__rule" aria-hidden="true"></span>
+          <p class="value-split__difference">IFPE Conseil met son expertise, sa vision intégrée et sa capacité d’adaptation au service de la performance durable des organisations.</p>
+
+          <div class="value-split__pillars">
+            <article class="value-split__pillar">
+              <h3>Une expertise éprouvée</h3>
+              <p>Plus de 30 ans d’expérience dans l’entreprise, l’industrie, les services, l’éducation et la formation professionnelle.</p>
+            </article>
+            <article class="value-split__pillar">
+              <h3>Une approche intégrée</h3>
+              <p>Intervention simultanée sur les dimensions humaine, technique, organisationnelle, stratégique et numérique.</p>
+            </article>
+            <article class="value-split__pillar">
+              <h3>Des solutions sur mesure</h3>
+              <p>Chaque mission est adaptée aux réalités, au secteur d’activité et aux objectifs spécifiques du client.</p>
+            </article>
+          </div>
         </div>
+      </div>
+
+      <div class="value-split__visual">
+        <img
+          src="assets/images/notre-valeur-ajoutee-equipe.png"
+          alt="Équipe de consultants réunie autour de documents stratégiques"
+          class="protected-image value-split__image"
+          width="971"
+          height="1619"
+          draggable="false"
+          fetchpriority="high"
+        />
       </div>
     </section>
 
-    <section id="intro" class="services-mission">
-      <div class="services-mission-inner">
-        <div>
-          <span class="mb-4 inline-flex rounded-full bg-blue/10 px-4 py-1.5 text-xs font-extrabold uppercase tracking-wider text-blue">Accompagnement global</span>
-          <h2 class="services-mission-title">Un accompagnement complet pour renforcer votre performance</h2>
-          <div class="services-mission-rule" aria-hidden="true"></div>
-          <p class="services-mission-text">
-            IFPE Conseil accompagne les entreprises, les administrations publiques, les institutions de formation et les organisations dans l'amélioration de leur fonctionnement, le développement des compétences, la transformation numérique et la réussite de leurs projets stratégiques.
-          </p>
+    <section class="contact-cta" aria-labelledby="contact-cta-title">
+      <div class="contact-cta__inner">
+        <div class="contact-cta__content">
+          <span class="contact-cta__eyebrow">Un besoin ? Un projet ?</span>
+          <h2 id="contact-cta-title">Nous contacter</h2>
+          <p>Échangeons sur vos besoins et construisons ensemble une solution adaptée à votre organisation.</p>
         </div>
-
-        <div class="services-mission-image-wrap">
-          <img
-            src="assets/images/service-diagnostic-organisationnel.png"
-            alt="Consultant présentant un diagnostic organisationnel à une équipe"
-            class="protected-image services-mission-image"
-            loading="lazy" draggable="false" />
-        </div>
-      </div>
-    </section>
-
-    <section id="expertises" class="bg-white px-4 pb-24">
-      <div class="mx-auto max-w-7xl">
-        <div>
-          <article class="service-detail-row">
-            <div class="service-detail-copy">
-              <section class="service-detail-item">
-                <h3 class="service-detail-heading">Diagnostic organisationnel</h3>
-                <p>Nous réalisons une lecture complète de l’organisation afin d’identifier ses forces, ses points de vigilance et les leviers prioritaires de performance.</p>
-                <ul class="service-detail-list">
-                  <li>Analyse des structures, responsabilités et modes de fonctionnement</li>
-                  <li>Évaluation des pratiques internes et des mécanismes de coordination</li>
-                  <li>Plan d’amélioration réaliste, hiérarchisé et mesurable</li>
-                </ul>
-              </section>
-
-              <section class="service-detail-item">
-                <h3 class="service-detail-heading">Optimisation des processus</h3>
-                <p>Nous simplifions les opérations et sécurisons les processus pour renforcer durablement l’efficacité, la qualité et l’agilité de l’organisation.</p>
-                <ul class="service-detail-list">
-                  <li>Cartographie des processus et détection des points de friction</li>
-                  <li>Clarification des circuits, rôles et niveaux de décision</li>
-                  <li>Indicateurs de suivi et démarches d’amélioration continue</li>
-                </ul>
-              </section>
-            </div>
-
-            <div class="service-detail-gallery" aria-label="Diagnostic et optimisation des processus">
-              <img class="protected-image" src="assets/images/service-diagnostic-organisationnel.png" alt="Présentation d’un diagnostic organisationnel" loading="lazy" draggable="false" />
-              <img class="protected-image" src="assets/images/service-optimisation-processus.png" alt="Analyse d’indicateurs pour optimiser les processus" loading="lazy" draggable="false" />
-            </div>
-          </article>
-
-          <article class="service-detail-row">
-            <div class="service-detail-copy">
-              <section class="service-detail-item">
-                <h3 class="service-detail-heading">Ingénierie de formation</h3>
-                <p>Nous concevons des dispositifs de formation directement reliés aux besoins réels des collaborateurs et aux orientations stratégiques de l’organisation.</p>
-                <ul class="service-detail-list">
-                  <li>Analyse des besoins et définition des objectifs pédagogiques</li>
-                  <li>Conception de programmes et de parcours sur mesure</li>
-                  <li>Évaluation des acquis et mesure de l’impact des formations</li>
-                </ul>
-              </section>
-
-              <section class="service-detail-item">
-                <h3 class="service-detail-heading">Référentiels métiers</h3>
-                <p>Nous développons des outils structurants pour partager une vision claire des emplois, des compétences attendues et des parcours professionnels.</p>
-                <ul class="service-detail-list">
-                  <li>Cartographie des métiers, emplois et compétences</li>
-                  <li>Élaboration de fiches de poste et référentiels opérationnels</li>
-                  <li>Appui à la GPEC et au développement des talents</li>
-                </ul>
-              </section>
-            </div>
-
-            <div class="service-detail-gallery" aria-label="Formation et référentiels métiers">
-              <img class="protected-image" src="assets/images/service-ingenierie-formation.png" alt="Session d’ingénierie de formation" loading="lazy" draggable="false" />
-              <img class="protected-image" src="assets/images/service-referentiels-metiers-competences.png" alt="Analyse de référentiels métiers et compétences" loading="lazy" draggable="false" />
-            </div>
-          </article>
-
-          <article class="service-detail-row">
-            <div class="service-detail-copy">
-              <section class="service-detail-item">
-                <h3 class="service-detail-heading">Digitalisation des processus</h3>
-                <p>Nous accompagnons la modernisation des services en intégrant des solutions numériques utiles, accessibles et adaptées aux pratiques des équipes.</p>
-                <ul class="service-detail-list">
-                  <li>Diagnostic de maturité et définition des priorités numériques</li>
-                  <li>Automatisation des tâches et digitalisation des parcours</li>
-                  <li>Accompagnement des utilisateurs et conduite du changement</li>
-                </ul>
-              </section>
-
-              <section class="service-detail-item">
-                <h3 class="service-detail-heading">Coaching des dirigeants</h3>
-                <p>Nous aidons les dirigeants, les managers et les équipes à renforcer leur leadership, leur communication et leur capacité à mobiliser collectivement.</p>
-                <ul class="service-detail-list">
-                  <li>Coaching individuel et accompagnement à la prise de fonction</li>
-                  <li>Développement de la posture et des pratiques managériales</li>
-                  <li>Cohésion d’équipe, communication et gestion des situations sensibles</li>
-                </ul>
-              </section>
-            </div>
-
-            <div class="service-detail-gallery" aria-label="Transformation numérique et coaching">
-              <img class="protected-image" src="assets/images/service-digitalisation-processus.png" alt="Digitalisation des processus de travail" loading="lazy" draggable="false" />
-              <img class="protected-image" src="assets/images/service-coaching-dirigeants-managers.png" alt="Coaching d’un dirigeant et accompagnement managérial" loading="lazy" draggable="false" />
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="px-4 py-20 lg:py-24">
-      <div class="mx-auto max-w-7xl overflow-hidden rounded-3xl bg-navy px-6 py-16 text-center shadow-soft lg:px-16">
-        <div class="mx-auto max-w-3xl">
-          <h2 class="text-3xl font-extrabold leading-tight text-white lg:text-5xl">Parlons de votre projet</h2>
-          <p class="mt-6 text-base leading-relaxed lg:text-lg" style="color: rgba(255, 255, 255, 0.88);">
-            IFPE Conseil vous accompagne dans la définition, la structuration et la mise en œuvre de solutions adaptées à vos enjeux.
-          </p>
-          <a href="contact.html" class="mt-9 inline-flex items-center justify-center rounded-2xl px-8 py-4 text-sm font-extrabold text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-white hover:text-navy" style="background-color: #2F93C9; color: #FFFFFF; box-shadow: 0 12px 28px rgba(47, 147, 201, 0.28);">
-            Nous contacter
-          </a>
-        </div>
+        <a href="contact.html#formulaire" class="contact-cta__button">Formulaire de contact</a>
       </div>
     </section>
   </main>
@@ -778,7 +734,6 @@
       </div>
     </div>
   </footer>
-
   <script src="script.js" defer></script>
 </body>
 </html>

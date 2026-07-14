@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -544,13 +544,14 @@
 </head>
 
 <body class="font-sans text-ink bg-white antialiased">
+
   <!-- ===== HEADER ===== -->
   <header id="site-header" class="fixed top-0 left-0 right-0 z-[1000] px-4 pt-5 pb-3">
     <div class="header-pill relative z-20 max-w-[92rem] mx-auto bg-white/95 backdrop-blur-xl rounded-3xl border border-white/80 shadow-[0_18px_55px_rgba(0,65,127,0.14)] px-4 lg:px-5 py-4 flex items-center gap-4 transition-all duration-300">
 
       <!-- Logo -->
       <a href="index.html" class="flex-shrink-0">
-        <img src="assets/logo.png" alt="IFPE Conseil" class="h-12 2xl:h-14 w-auto" />
+        <img src="assets/logo.png" alt="IFPE Conseil" class="protected-image h-12 2xl:h-14 w-auto" draggable="false" />
       </a>
 
       <!-- Nav desktop -->
@@ -593,7 +594,7 @@
 
       <!-- Right icons -->
       <div class="flex items-center gap-2 ml-auto">
-        <button id="search-toggle" type="button" aria-label="Ouvrir la recherche" class="hidden md:inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-[#cfdbea] bg-white text-navy shadow-inner shadow-navy/5 hover:border-blue hover:text-blue transition-colors">
+        <button id="search-toggle" type="button" aria-label="Ouvrir la recherche" class="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-2xl border border-[#cfdbea] bg-white text-navy shadow-inner shadow-navy/5 hover:border-blue hover:text-blue transition-colors">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
         </button>
 
@@ -680,7 +681,7 @@
           <p class="text-sm leading-relaxed text-gray-600">Des solutions intégrées pour accompagner la performance, la transformation et le développement durable des organisations.</p>
         </div>
         <!-- Col centrale -->
-        <div class="p-8 border-r border-silver flex flex-col gap-2">
+        <div class="domain-menu-list p-8 border-r border-silver flex flex-col gap-2">
           <a href="domaines.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-silver transition-colors group">
             <span class="w-2 h-2 rounded-full bg-green flex-shrink-0"></span>
             <span class="text-sm font-medium text-ink group-hover:text-navy">Développement organisationnel</span>
@@ -710,18 +711,16 @@
             <span class="text-sm font-medium text-ink group-hover:text-navy">Coaching professionnel</span>
           </a>
         </div>
-        <!-- Col droite – carte visuelle -->
+        <!-- Col droite – aperçu dynamique -->
         <div class="p-8 flex items-center justify-center">
-          <div class="w-full rounded-2xl overflow-hidden" style="background: linear-gradient(135deg, var(--ifpe-dark-blue) 0%, var(--ifpe-medium-blue) 50%, var(--ifpe-light-blue) 100%);">
-            <div class="p-8 text-white">
-              <p class="text-xs font-semibold uppercase tracking-widest opacity-75 mb-3">IFPE Conseil</p>
-              <h4 class="text-xl font-bold mb-3 leading-snug">Expertise, conseil et formation</h4>
-              <p class="text-sm opacity-80 leading-relaxed">Accompagner les organisations dans leur transformation et leur montée en performance.</p>
-              <div class="mt-6 flex flex-wrap gap-2">
-                <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-medium">Conseil</span>
-                <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-medium">Formation</span>
-                <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-medium">Performance</span>
-              </div>
+          <div id="domain-menu-preview" class="domain-menu-preview relative h-[330px] w-full overflow-hidden rounded-2xl bg-navy">
+            <img id="domain-menu-preview-image" src="assets/images/menu-domain-organisation.jpg" alt="Développement organisationnel" class="protected-image h-full w-full object-cover" draggable="false" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#173A63]/95 via-[#173A63]/45 to-transparent"></div>
+            <div class="absolute inset-x-0 bottom-0 p-6 text-white">
+              <p class="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white/75">IFPE Conseil</p>
+              <h4 id="domain-menu-preview-title" class="text-xl font-bold leading-snug">Développement organisationnel</h4>
+              <p id="domain-menu-preview-text" class="mt-2 text-xs leading-5 text-white/85">Améliorer durablement l’organisation, les processus et la performance.</p>
+              <span class="mt-4 inline-flex items-center gap-2 text-xs font-bold">En savoir plus <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/></svg></span>
             </div>
           </div>
         </div>
@@ -789,6 +788,7 @@
           <span class="inline-block px-3 py-1 bg-green/10 text-green text-xs font-semibold rounded-full mb-4 uppercase tracking-wider">Valeur ajoutée</span>
           <h3 class="text-2xl font-bold text-navy mb-4">Ce qui nous distingue</h3>
           <p class="text-sm leading-relaxed text-gray-600">Trois piliers fondamentaux qui font d'IFPE Conseil un partenaire de confiance pour votre performance durable.</p>
+          <a href="valeur-ajoutee.html" class="mt-5 inline-flex text-sm font-bold text-blue hover:text-navy">Découvrir notre valeur ajoutée →</a>
         </div>
         <div class="p-8 border-r border-silver flex flex-col gap-4">
           <div class="p-5 rounded-2xl bg-silver">
@@ -826,7 +826,7 @@
     <div id="search-bar" class="hidden max-w-3xl mx-auto mt-3 px-2">
       <div class="bg-white rounded-2xl border border-silver shadow-2xl shadow-navy/15 px-6 py-4 flex items-center gap-4">
         <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
-        <input type="search" placeholder="Rechercher sur IFPE Conseil..." class="flex-1 outline-none text-sm text-ink placeholder-gray-400" />
+        <input type="search" placeholder="Rechercher sur IFPE Conseil…" class="flex-1 outline-none text-sm text-ink placeholder-gray-400" />
         <button id="search-close" class="text-gray-400 hover:text-navy transition-colors">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
@@ -838,7 +838,7 @@
   <div id="mobile-menu" class="fixed inset-0 z-[1010] bg-white transform -translate-x-full transition-transform duration-300 overflow-y-auto lg:hidden">
     <div class="p-6">
       <div class="flex items-center justify-between mb-8">
-        <img src="assets/logo.png" alt="IFPE Conseil" class="h-12 w-auto" />
+        <img src="assets/logo.png" alt="IFPE Conseil" class="protected-image h-12 w-auto" draggable="false" />
         <button id="mobile-close" class="p-2 rounded-xl hover:bg-silver transition-colors">
           <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
@@ -847,7 +847,7 @@
         <a href="index.html#qui" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Qui sommes-nous ?</a>
         <a href="domaines.html" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Domaines d'intervention</a>
         <a href="services.html" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Nos services</a>
-        <a href="index.html#valeur" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Notre valeur ajoutée</a>
+        <a href="valeur-ajoutee.html" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Notre valeur ajoutée</a>
         <a href="contact.html" class="mobile-link px-4 py-3 rounded-xl text-sm font-semibold text-navy hover:bg-silver transition-colors">Contact</a>
         <a href="contact.html" class="mt-4 flex items-center justify-center gap-2 px-6 py-3 bg-navy text-white rounded-xl text-sm font-semibold hover:bg-blue transition-colors">Nous contacter</a>
       </nav>
@@ -947,7 +947,7 @@
               <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.3" d="M9 5l7 7-7 7"/></svg>
             </button>
             <article class="domain-panel is-active" data-domain-panel="organisation">
-              <img src="assets/images/domain-organisation-performance.png" alt="Développement organisationnel et amélioration de la performance" class="rounded-2xl shadow-card" />
+              <img src="assets/images/domain-organisation-performance.png" alt="Développement organisationnel et amélioration de la performance" class="protected-image rounded-2xl shadow-card" draggable="false" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Développement organisationnel et amélioration de la performance</h3>
@@ -967,7 +967,7 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="rh">
-              <img src="assets/images/domain-rh-strategique.png" alt="Gestion stratégique des ressources humaines" class="rounded-2xl shadow-card" />
+              <img src="assets/images/domain-rh-strategique.png" alt="Gestion stratégique des ressources humaines" class="protected-image rounded-2xl shadow-card" draggable="false" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Gestion stratégique des ressources humaines</h3>
@@ -987,7 +987,7 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="formation">
-              <img src="assets/images/domain-formation-competences.png" alt="Formation professionnelle et développement des compétences" class="rounded-2xl shadow-card" />
+              <img src="assets/images/domain-formation-competences.png" alt="Formation professionnelle et développement des compétences" class="protected-image rounded-2xl shadow-card" draggable="false" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Formation professionnelle et développement des compétences</h3>
@@ -1007,7 +1007,7 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="referentiels">
-              <img src="assets/images/domain-etudes-referentiels.png" alt="Études, ingénierie et référentiels" class="rounded-2xl shadow-card" />
+              <img src="assets/images/domain-etudes-referentiels.png" alt="Études, ingénierie et référentiels" class="protected-image rounded-2xl shadow-card" draggable="false" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Études, ingénierie et référentiels</h3>
@@ -1027,7 +1027,7 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="digital">
-              <img src="assets/images/domain-transformation-numerique-ia.png" alt="Transformation numérique et intelligence artificielle" class="rounded-2xl shadow-card" />
+              <img src="assets/images/domain-transformation-numerique-ia.png" alt="Transformation numérique et intelligence artificielle" class="protected-image rounded-2xl shadow-card" draggable="false" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Transformation numérique et intelligence artificielle</h3>
@@ -1047,7 +1047,7 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="strategie">
-              <img src="assets/images/domain-strategie-changement.png" alt="Planification stratégique et accompagnement du changement" class="rounded-2xl shadow-card" />
+              <img src="assets/images/domain-strategie-changement.png" alt="Planification stratégique et accompagnement du changement" class="protected-image rounded-2xl shadow-card" draggable="false" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Planification stratégique et accompagnement du changement</h3>
@@ -1067,7 +1067,7 @@
             </article>
 
             <article class="domain-panel" data-domain-panel="coaching">
-              <img src="assets/images/domain-coaching-equipes.png" alt="Coaching professionnel et mobilisation des équipes" class="rounded-2xl shadow-card" />
+              <img src="assets/images/domain-coaching-equipes.png" alt="Coaching professionnel et mobilisation des équipes" class="protected-image rounded-2xl shadow-card" draggable="false" />
               <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_18rem]">
                 <div>
                   <h3 class="text-2xl font-extrabold leading-tight text-navy lg:text-3xl">Coaching professionnel et mobilisation des équipes</h3>
@@ -1169,7 +1169,7 @@
       <div class="domain-detail-grid">
         <article class="domain-detail-main">
           <div class="domain-detail-image-wrap">
-            <img id="detail-image" class="domain-detail-image" src="assets/images/domain-organisation-performance.png" alt="Développement organisationnel" />
+            <img id="detail-image" class="protected-image domain-detail-image" src="assets/images/domain-organisation-performance.png" alt="Développement organisationnel" draggable="false" />
           </div>
           <div class="domain-detail-content">
             <h1 id="detail-title" class="domain-detail-title">Développement organisationnel</h1>
@@ -1197,9 +1197,11 @@
     </div>
   </main>
 
+  <!-- ===== FOOTER ===== -->
   <footer style="background-color: var(--ifpe-dark-blue);">
     <div class="max-w-7xl mx-auto px-4 py-16">
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- Col 1 – Brand -->
         <div class="lg:col-span-1">
           <div class="mb-4">
             <span class="text-2xl font-bold text-white tracking-wide">IFPE <span style="color:var(--ifpe-light-blue)">CONSEIL</span></span>
@@ -1217,17 +1219,19 @@
           </div>
         </div>
 
+        <!-- Col 2 – Liens rapides -->
         <div>
           <h4 class="text-sm font-bold text-white mb-5 uppercase tracking-wider">Liens rapides</h4>
           <ul class="space-y-3">
             <li><a href="index.html#qui" class="text-sm text-white/65 hover:text-white transition-colors">Qui sommes-nous ?</a></li>
             <li><a href="domaines.html" class="text-sm text-white/65 hover:text-white transition-colors">Domaines d'intervention</a></li>
             <li><a href="services.html" class="text-sm text-white/65 hover:text-white transition-colors">Nos services</a></li>
-            <li><a href="index.html#valeur" class="text-sm text-white/65 hover:text-white transition-colors">Notre valeur ajoutée</a></li>
+            <li><a href="valeur-ajoutee.html" class="text-sm text-white/65 hover:text-white transition-colors">Notre valeur ajoutée</a></li>
             <li><a href="contact.html" class="text-sm text-white/65 hover:text-white transition-colors">Contact</a></li>
           </ul>
         </div>
 
+        <!-- Col 3 – Domaines -->
         <div>
           <h4 class="text-sm font-bold text-white mb-5 uppercase tracking-wider">Nos domaines</h4>
           <ul class="space-y-3">
@@ -1240,6 +1244,7 @@
           </ul>
         </div>
 
+        <!-- Col 4 – Contact -->
         <div>
           <h4 class="text-sm font-bold text-white mb-5 uppercase tracking-wider">Contact</h4>
           <ul class="space-y-4">
@@ -1259,6 +1264,7 @@
         </div>
       </div>
 
+      <!-- Divider -->
       <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p class="text-xs text-white/45">© 2026 IFPE Conseil. Tous droits réservés.</p>
         <p class="text-xs text-white/45">Ingénierie · Conseil · Formation · Performance</p>
@@ -1266,7 +1272,7 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const counters = document.querySelectorAll('[data-counter]');
